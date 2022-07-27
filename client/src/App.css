@@ -4,9 +4,13 @@
   display: flex;
   justify-content: center;
   background-color: lightseagreen;
+  min-width:fit-content;
+  min-height: fit-content;
 }
 
 .editor {
+  min-width:fit-content;
+  min-height: fit-content;
   display: flex;
   background-color: white;
   align-items: center;
@@ -21,10 +25,19 @@
 }
 
 .toolbar {
-  width: 100px;
+  width: 120px;
   height: 90%;
   border: grey solid 1px;
   margin: 0.5rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.toolbar > * {
+  margin: 0.5rem 0;
+}
+
+.color-picker {
+  margin-left: 0.3rem;
 }

@@ -85,16 +85,49 @@ function Toolbar ({ setShapes, setBackgroundColor }) {
   }
 
 
+  function addText (event) {
+    event.preventDefault();
+
+    
+    setShapes((prevlist) => {
+
+      const newId = prevlist.length ? prevlist[prevlist.length - 1].key + 1 : 1;
+
+      const newText = {
+        type: 'text',
+        id:  JSON.stringify(newId),
+        key: newId,
+        x: 20,
+        y: 20,
+        text: 'Add text',
+        fontSize: 30,
+        fontFamily: 'Calibri',
+        fill: fillColor,
+        draggable: true, 
+      }
+
+      return [...prevlist, newText]
+    })
+  }
+
+
+
 
   return (
     <div className="toolbar">
-      <label>Background:</label>
-      <input type='color' onChange={handleBackgroundChange} />
-      <label>Fill:</label>
-      <input type='color' onChange={handleColorChange} />
+      <div>
+        <label>BG:</label>
+        <input className='color-picker' type='color' onChange={handleBackgroundChange} defaultValue="#ffffff"/>
+      </div>
+
+      <div>
+        <label>Fill:</label>
+        <input className='color-picker' type='color' onChange={handleColorChange} />
+      </div>
       <button onClick={addSquare}>Square</button>
       <button onClick={addCircle}>Circle</button>
       <button onClick={addStar}>Star</button>
+      <button onClick={addText}>Text</button>
     </div>
   )
 }

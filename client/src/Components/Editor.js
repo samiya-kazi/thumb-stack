@@ -3,6 +3,7 @@ import { Stage, Layer, Rect } from 'react-konva';
 import CircleElement from './CircleElement';
 import SquareElement from './SquareElement';
 import StarElement from './StarElement';
+import TextElement from './TextElement';
 import Toolbar from './Toolbar';
 
 function Editor () {
@@ -77,6 +78,17 @@ function Editor () {
 
                 case 'star':
                   return <StarElement 
+                    shape={shape} 
+                    setShapes={setShapes} 
+                    key={shape.key} 
+                    isSelected={shape.id === selectedId}
+                    onSelect={() => {
+                      setSelectedId(shape.id);
+                    }}
+                    />
+
+                case 'text':
+                  return <TextElement 
                     shape={shape} 
                     setShapes={setShapes} 
                     key={shape.key} 
