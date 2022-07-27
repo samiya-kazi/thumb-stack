@@ -46,7 +46,7 @@ function Toolbar ({ setShapes }) {
         key: newId,
         x: 20,
         y: 20,
-        radius: 50, 
+        radius: 25, 
         fill: fillColor,
         draggable: true, 
       }

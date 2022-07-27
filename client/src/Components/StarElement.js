@@ -41,8 +41,10 @@ function StarElement ({ shape, setShapes, isSelected, onSelect }) {
 
     const x = node.x();
     const y = node.y();
-    const width = Math.max(5, node.width() * scaleX);
-    const height= Math.max(node.height() * scaleY);
+    const width = Math.max(10, node.width() * scaleX);
+    const height= Math.max(10, node.height() * scaleY);
+    const innerRadius = node.innerRadius() * scaleX;
+    const outerRadius = node.outerRadius() * scaleX;
 
     setShapes((prevlist) => {
       const newlist = [...prevlist].filter((listshape) => listshape.id !== shape.id);
@@ -51,7 +53,9 @@ function StarElement ({ shape, setShapes, isSelected, onSelect }) {
         x,
         y,
         width,
-        height
+        height,
+        innerRadius,
+        outerRadius
       })
 
       return newlist;
