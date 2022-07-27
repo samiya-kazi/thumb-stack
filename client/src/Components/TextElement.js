@@ -73,27 +73,46 @@ function TextElement ({ shape, setShapes, isSelected, onSelect }) {
 
   function changeText (e) {
     const stage = e.target.getStage();
-    const textPosition = stage.getPointerPosition();
-    // at first lets find position of text node relative to the stage:
+    const textPosition = shapeRef.current.absolutePosition();
 
-    // then lets find position of stage container on the page:
-    var stageBox = stage.container().getBoundingClientRect();
+    shapeRef.current.hide();
+    trRef.current.hide();
 
-    // so position of textarea will be the sum of positions above:
-    var areaPosition = {
-      x: stageBox.left + textPosition.x,
-      y: stageBox.top + textPosition.y,
+    const areaPosition = {
+      x: stage.container().offsetLeft + textPosition.x,
+      y: stage.container().offsetTop + textPosition.y,
     };
 
     // create textarea and style it
     var textarea = document.createElement('textarea');
     document.body.appendChild(textarea);
 
-    textarea.value = shape.text;
-    textarea.style.position = 'absolute';
-    textarea.style.top = areaPosition.y + 'px';
-    textarea.style.left = areaPosition.x + 'px';
-    textarea.style.width = shape.width;
+    textarea.value = shapeRef.current.text();
+        textarea.style.position = 'absolute';
+        textarea.style.top = areaPosition.y + 'px';
+        textarea.style.left = areaPosition.x + 'px';
+        // textarea.style.width = shapeRef.current.width() - shapeRef.current.padding() * 2 + 'px';
+        textarea.style.maxWidth = stage.width();
+        textarea.style.height =
+          shapeRef.current.height() - shapeRef.current.padding() * 2 + 5 + 'px';
+        textarea.style.fontSize = shapeRef.current.fontSize() + 'px';
+        textarea.style.border = 'none';
+        textarea.style.padding = '0px';
+        textarea.style.margin = '0px';
+        textarea.style.overflow = 'visible';
+        textarea.style.background = 'none';
+        textarea.style.outline = 'none';
+        textarea.style.resize = 'none';
+        textarea.style.lineHeight = shapeRef.current.lineHeight();
+        textarea.style.fontFamily = shapeRef.current.fontFamily();
+        textarea.style.transformOrigin = 'left top';
+        textarea.style.textAlign = shapeRef.current.align();
+        textarea.style.color = shapeRef.current.fill();
+        let rotation = shapeRef.current.rotation();
+        var transform = '';
+        if (rotation) {
+          transform += 'rotateZ(' + rotation + 'deg)';
+        }
 
     textarea.focus();
 
@@ -102,6 +121,7 @@ function TextElement ({ shape, setShapes, isSelected, onSelect }) {
       if (e.keyCode === 13) {
         handleSubmit(textarea.value);
         document.body.removeChild(textarea);
+        shapeRef.current.show();
       }
     });
   }
