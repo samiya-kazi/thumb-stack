@@ -1,11 +1,15 @@
 import { useState } from "react";
 
-function Toolbar ({ setShapes }) {
+function Toolbar ({ setShapes, setBackgroundColor }) {
 
   const [fillColor, setFillColor] = useState('#000000')
 
   function handleColorChange (event) {
     setFillColor(event.target.value)
+  }
+
+  function handleBackgroundChange (event) {
+    setBackgroundColor(event.target.value)
   }
 
 
@@ -84,7 +88,9 @@ function Toolbar ({ setShapes }) {
 
   return (
     <div className="toolbar">
-      <label>Select fill color:</label>
+      <label>Background:</label>
+      <input type='color' onChange={handleBackgroundChange} />
+      <label>Fill:</label>
       <input type='color' onChange={handleColorChange} />
       <button onClick={addSquare}>Square</button>
       <button onClick={addCircle}>Circle</button>
