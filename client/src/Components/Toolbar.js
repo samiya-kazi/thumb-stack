@@ -1,13 +1,20 @@
-import {Rect, Circle, Star} from 'react-konva';
+import { useState } from "react";
 
 function Toolbar ({ setShapes }) {
+
+  const [fillColor, setFillColor] = useState('#000000')
+
+  function handleColorChange (event) {
+    setFillColor(event.target.value)
+  }
+
 
   function addSquare (event) {
     event.preventDefault();
 
     setShapes((prevlist) => {
 
-      const newId = prevlist.length ? prevlist[prevlist.length - 1].id + 1 : 1;
+      const newId = prevlist.length ? prevlist[prevlist.length - 1].key + 1 : 1;
 
       const newSquare = {
         type: 'square',
@@ -17,7 +24,7 @@ function Toolbar ({ setShapes }) {
         y: 20,
         width: 50, 
         height: 50, 
-        fill: "red",
+        fill: fillColor,
         draggable: true
       }
 
@@ -40,7 +47,7 @@ function Toolbar ({ setShapes }) {
         x: 20,
         y: 20,
         radius: 50, 
-        fill: "blue",
+        fill: fillColor,
         draggable: true, 
       }
 
@@ -65,7 +72,7 @@ function Toolbar ({ setShapes }) {
         numPoints: 5, 
         innerRadius: 20,
         outerRadius: 40,
-        fill: "yellow",
+        fill: fillColor,
         draggable: true, 
       }
 
@@ -77,6 +84,8 @@ function Toolbar ({ setShapes }) {
 
   return (
     <div className="toolbar">
+      <label>Select fill color:</label>
+      <input type='color' onChange={handleColorChange} />
       <button onClick={addSquare}>Square</button>
       <button onClick={addCircle}>Circle</button>
       <button onClick={addStar}>Star</button>
