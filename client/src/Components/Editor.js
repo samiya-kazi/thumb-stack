@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { Stage, Layer, Rect } from 'react-konva';
+import { saveThumbnail } from '../Services/thumbnail';
 import ShapeElement from './ShapeElement';
 import TextElement from './TextElement';
 import Toolbar from './Toolbar';
@@ -44,6 +45,11 @@ function Editor () {
       })
     }
   }
+
+  const handlePost = () => {
+    saveThumbnail(shapes, backgroundColor)
+      .then(() => console.log('Saved in DB.'))
+  } 
 
 
   return (
@@ -98,7 +104,8 @@ function Editor () {
           640 x 350
         </div>
         <div className='button-container'>
-          <button onClick={handleExport}>Save Image</button>
+          <button onClick={handleExport}>Download Image</button>
+          <button onClick={handlePost}>Save Image</button>
         </div>
       </div>
     </div>
