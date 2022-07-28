@@ -52,7 +52,6 @@
   display: flex;
   flex-direction: column;
   background-color: white;
-  border: black solid 1px;
   margin: 10px;
 }
 
@@ -86,4 +85,6 @@ button:active {
 .font-selector {
   width: 90%;
   padding: 5px;
+  border: rgb(45, 173, 228) solid 2px;
+  border-radius: 10px;
 }
