@@ -92,7 +92,6 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
 
   function addText (event) {
     event.preventDefault();
-
     
     setShapes((prevlist) => {
 

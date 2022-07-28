@@ -1,7 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef,useState } from "react";
 import { Text, Transformer } from "react-konva"
+import TextEditor from "./TextEditor";
 
 function TextElement ({ shape, setShapes, isSelected, onSelect }) {
+
+  const [isEdit, setIsEdit] = useState(false);
+  const [stage, setStage] = useState(null);
 
   const shapeRef = useRef();
   const trRef = useRef();
@@ -61,70 +65,38 @@ function TextElement ({ shape, setShapes, isSelected, onSelect }) {
   }
 
   function handleSubmit (text) {
-    setShapes((prevlist) => {
-      const newlist = [...prevlist].filter((listshape) => listshape.id !== shape.id);
-      newlist.push({
-        ...shape,
-        text
-      })
-
-      return newlist;
-    })
-    
+    if(isEdit) {
+      setShapes((prevlist) => {
+        const newlist = [...prevlist].map((listshape) => {
+          if(listshape.id === shape.id)
+            listshape.text = text;
+  
+          return listshape;
+        });
+  
+        return newlist;
+      });
+  
+      setIsEdit(false);
+      removeTextarea();
+    }  
   }
 
   function changeText (e) {
     const stage = e.target.getStage();
-    const textPosition = shapeRef.current.absolutePosition();
 
     shapeRef.current.hide();
     trRef.current.hide();
 
-    const areaPosition = {
-      x: stage.container().offsetLeft + textPosition.x,
-      y: stage.container().offsetTop + textPosition.y,
-    };
+    setStage(stage);
+    setIsEdit(true);
+  }
 
-    // create textarea and style it
-    let textarea = document.createElement('textarea');
-    document.body.appendChild(textarea);
-
-    textarea.value = shapeRef.current.text();
-        textarea.style.position = 'absolute';
-        textarea.style.top = areaPosition.y + 'px';
-        textarea.style.left = areaPosition.x + 'px';
-        textarea.style.maxWidth = stage.width();
-        textarea.style.height = shapeRef.current.height() - shapeRef.current.padding() * 2 + 5 + 'px';
-        textarea.style.fontSize = shapeRef.current.fontSize() + 'px';
-        textarea.style.border = 'none';
-        textarea.style.padding = '0px';
-        textarea.style.margin = '0px';
-        textarea.style.overflow = 'visible';
-        textarea.style.background = 'none';
-        textarea.style.outline = 'none';
-        textarea.style.resize = 'none';
-        textarea.style.lineHeight = shapeRef.current.lineHeight();
-        textarea.style.fontFamily = shapeRef.current.fontFamily();
-        textarea.style.transformOrigin = 'left top';
-        textarea.style.textAlign = shapeRef.current.align();
-        textarea.style.color = shapeRef.current.fill();
-        let rotation = shapeRef.current.rotation();
-        var transform = '';
-        if (rotation) {
-          transform += 'rotateZ(' + rotation + 'deg)';
-        }
-
-        textarea.style.transform = transform;
-    textarea.focus();
-
-    textarea.addEventListener('keydown', function (e) {
-      // hide on enter
-      if (e.keyCode === 13) {
-        handleSubmit(textarea.value);
-        document.body.removeChild(textarea);
-        shapeRef.current.show();
-      }
-    });
+  function removeTextarea () {
+    if(shapeRef.current) {
+      shapeRef.current.show();
+      setIsEdit(false);
+    }
   }
 
 
@@ -155,6 +127,17 @@ function TextElement ({ shape, setShapes, isSelected, onSelect }) {
         }}
       />
     )}
+
+    {isEdit && (
+      <TextEditor 
+        shapeRef={shapeRef}
+        handleSubmit={handleSubmit}
+        stage={stage}
+        removeTextarea={removeTextarea}
+      />
+    )
+
+    }
     </>
   )
 }
