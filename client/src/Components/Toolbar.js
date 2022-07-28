@@ -2,7 +2,8 @@ import { useState } from "react";
 
 function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
 
-  const [fillColor, setFillColor] = useState('#000000')
+  const [fillColor, setFillColor] = useState('#000000');
+  const [opacity, setOpacity] = useState('1');
   const [font, setFont] = useState('Calibri');
 
   function handleColorChange (event) {
@@ -15,6 +16,15 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
 
   function handleFontChange(event) {
     setFont(event.target.value)
+  }
+
+  function handleOpacityChange (event) {
+    setOpacity(event.target.value);
+  }
+
+  function getRGBA () {
+    const rgbaCol = 'rgba(' + parseInt(fillColor.slice(-6, -4), 16) + ',' + parseInt(fillColor.slice(-4, -2), 16) + ',' + parseInt(fillColor.slice(-2), 16) + ',' + opacity + ')';
+    return rgbaCol;
   }
 
 
@@ -33,7 +43,7 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
         y: 20,
         width: 50, 
         height: 50, 
-        fill: fillColor,
+        fill: getRGBA(),
         draggable: true
       }
 
@@ -56,7 +66,7 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
         x: 20,
         y: 20,
         radius: 25, 
-        fill: fillColor,
+        fill: getRGBA(),
         draggable: true, 
       }
 
@@ -81,7 +91,7 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
         numPoints: 5, 
         innerRadius: 20,
         outerRadius: 40,
-        fill: fillColor,
+        fill: getRGBA(),
         draggable: true, 
       }
 
@@ -106,7 +116,7 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
         text: 'Add text',
         fontSize: 30,
         fontFamily: font,
-        fill: fillColor,
+        fill: getRGBA(),
         draggable: true, 
       }
 
@@ -127,6 +137,11 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
       <div>
         <label>Fill:</label>
         <input className='color-picker' type='color' onChange={handleColorChange} />
+      </div>
+
+      <div>
+        <label>Fill Opacity:</label>
+        <input type="range" min="0" max="1" step="0.1" onChange={handleOpacityChange} />
       </div>
 
       <div>
