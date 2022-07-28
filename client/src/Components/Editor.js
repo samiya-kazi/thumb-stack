@@ -1,8 +1,6 @@
 import { useState, useRef } from 'react';
 import { Stage, Layer, Rect } from 'react-konva';
-import CircleElement from './CircleElement';
-import SquareElement from './SquareElement';
-import StarElement from './StarElement';
+import ShapeElement from './ShapeElement';
 import TextElement from './TextElement';
 import Toolbar from './Toolbar';
 
@@ -70,39 +68,6 @@ function Editor () {
                 />
               {shapes.map((shape) => {
                 switch (shape.type) {
-                  case 'square':
-                    return <SquareElement 
-                    shape={shape} 
-                    setShapes={setShapes} 
-                    key={shape.key} 
-                    isSelected={shape.id === selectedId}
-                    onSelect={() => {
-                      setSelectedId(shape.id);
-                    }}
-                    />
-                    
-                    case 'circle':
-                      return <CircleElement 
-                      shape={shape} 
-                      setShapes={setShapes} 
-                      key={shape.key} 
-                      isSelected={shape.id === selectedId}
-                      onSelect={() => {
-                        setSelectedId(shape.id);
-                      }}
-                      />
-                      
-                    case 'star':
-                      return <StarElement 
-                      shape={shape} 
-                      setShapes={setShapes} 
-                      key={shape.key} 
-                      isSelected={shape.id === selectedId}
-                      onSelect={() => {
-                        setSelectedId(shape.id);
-                      }}
-                      />
-
                     case 'text':
                       return <TextElement 
                       shape={shape} 
@@ -114,7 +79,16 @@ function Editor () {
                       }}
                       />
 
-                    default: return null;
+                    default: 
+                      return <ShapeElement 
+                      shape={shape} 
+                      setShapes={setShapes} 
+                      key={shape.key} 
+                      isSelected={shape.id === selectedId}
+                      onSelect={() => {
+                        setSelectedId(shape.id);
+                      }}
+                      />;
                   }
               })}
             </Layer>

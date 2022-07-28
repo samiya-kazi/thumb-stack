@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
-import { Circle, Transformer } from "react-konva"
+import { Circle, Rect, Star, Transformer } from "react-konva"
 
-function CircleElement ({ shape, setShapes, isSelected, onSelect }) {
+function ShapeElement ({ shape, setShapes, isSelected, onSelect }) {
 
   const shapeRef = useRef();
   const trRef = useRef();
@@ -44,31 +44,57 @@ function CircleElement ({ shape, setShapes, isSelected, onSelect }) {
     const width = Math.max(5, node.width() * scaleX);
     const height= Math.max(node.height() * scaleY);
 
+    let newAttributes = {...shape, x, y, width, height}
+    if (shape.type === 'star') {
+      const innerRadius = node.innerRadius() * scaleX;
+      const outerRadius = node.outerRadius() * scaleX;
+      newAttributes = {...newAttributes, innerRadius, outerRadius}
+    }
+
     setShapes((prevlist) => {
+      
       const newlist = [...prevlist].filter((listshape) => listshape.id !== shape.id);
-      newlist.push({
-        ...shape,
-        x,
-        y,
-        width,
-        height
-      })
+      newlist.push(newAttributes);
 
       return newlist;
     })
 
   }
 
+
   return (
     <>
-    <Circle 
-      {...shape}
-      onDragEnd={handleDragEnd}
-      onClick={onSelect}
-      onTap={onSelect}
-      ref={shapeRef}
-      onTransformEnd={setTransformation}
-    />
+    {shape.type === 'square' ? 
+      (<Rect
+        {...shape}
+        onDragEnd = {handleDragEnd}
+        onClick={onSelect}
+        onTap={onSelect}
+        ref={shapeRef}
+        onTransformEnd={setTransformation}
+      />) 
+    : shape.type === 'circle' ? 
+      (<Circle
+        {...shape}
+        onDragEnd = {handleDragEnd}
+        onClick={onSelect}
+        onTap={onSelect}
+        ref={shapeRef}
+        onTransformEnd={setTransformation}
+      />)
+    : shape.type === 'star' ? 
+      (<Star
+        {...shape}
+        onDragEnd = {handleDragEnd}
+        onClick={onSelect}
+        onTap={onSelect}
+        ref={shapeRef}
+        onTransformEnd={setTransformation}
+      />)
+  : 
+    null 
+  }
+    
 
     {isSelected && (
       <Transformer
@@ -84,8 +110,9 @@ function CircleElement ({ shape, setShapes, isSelected, onSelect }) {
         }}
       />
     )}
+
     </>
   )
 }
 
-export default CircleElement
+export default ShapeElement
