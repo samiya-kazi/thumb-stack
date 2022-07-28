@@ -16,8 +16,8 @@ function Dashboard () {
 
   return (
     <>
-    <SavedThumbnails thumbnails={thumbnails} setSelectedThumbnail={setSelectedThumbnail}/>
-    <Editor selectedThumbnail={selectedThumbnail}/>
+    <SavedThumbnails thumbnails={thumbnails} setSelectedThumbnail={setSelectedThumbnail} />
+    <Editor selectedThumbnail={selectedThumbnail} setThumbnails={setThumbnails} />
     </>
   )
 }

@@ -22,7 +22,28 @@ async function postThumbnail (req, res) {
 }
 
 
+async function updateThumbnail (req, res) {
+  try {
+    const id = req.query.tid;
+    const newAttr = req.body;
+    const thumbnail = await Thumbnail.findById(id);
+    
+    for(const [key, value] of Object.entries(newAttr)) {
+      thumbnail[key] = value
+    }
+
+    const newThumbnail = await thumbnail.save();
+
+    res.status(201).send(newThumbnail);
+  } catch (error) {
+    res.status(500);
+    console.log(error);
+  }
+}
+
+
 module.exports = {
   getThumbnails,
-  postThumbnail
+  postThumbnail,
+  updateThumbnail
 }

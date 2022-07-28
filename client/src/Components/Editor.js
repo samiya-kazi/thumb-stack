@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 import { Stage, Layer, Rect } from 'react-konva';
-import { saveThumbnail } from '../Services/thumbnail';
+import { saveThumbnail, updateThumbnail } from '../Services/thumbnail';
 import ShapeElement from './ShapeElement';
 import TextElement from './TextElement';
 import Toolbar from './Toolbar';
 
-function Editor ({ selectedThumbnail }) {
+function Editor ({ selectedThumbnail, setThumbnails }) {
 
   const [shapes, setShapes] = useState(selectedThumbnail ? selectedThumbnail.elements : []);
   const [selectedId, setSelectedId] = useState(null);
@@ -59,8 +59,27 @@ function Editor ({ selectedThumbnail }) {
   }
 
   const handlePost = () => {
-    saveThumbnail(shapes, backgroundColor)
-      .then(() => console.log('Saved in DB.'))
+    if (selectedThumbnail) {
+      updateThumbnail(selectedThumbnail._id, shapes, backgroundColor)
+        .then((newThumbnail) => {
+          setThumbnails(prevlist => {
+            const newlist = prevlist.map(tn => {
+              if(tn._id === newThumbnail._id) {
+                tn = {...newThumbnail}
+              }
+              return tn
+            });
+            return newlist;
+          })
+        });
+    } else {
+      saveThumbnail(shapes, backgroundColor)
+        .then((newThumbnail) => {
+          setThumbnails(prevlist => [...prevlist, newThumbnail])
+        });
+    }
+
+
   } 
 
 
