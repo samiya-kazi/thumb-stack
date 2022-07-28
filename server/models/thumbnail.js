@@ -7,6 +7,11 @@ const thumbnailSchema = new Schema({
     required: true
   },
   elements: [thumbnailElementSchema],
+  background: {
+    type: String,
+    required: true,
+    default: '#000000'
+  },
   createdAt: {
     type: Date,
     default: Date.now()
