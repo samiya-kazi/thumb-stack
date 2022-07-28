@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Toolbar ({ setShapes, setBackgroundColor }) {
+function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
 
   const [fillColor, setFillColor] = useState('#000000')
   const [font, setFont] = useState('Calibri');
@@ -145,6 +145,7 @@ function Toolbar ({ setShapes, setBackgroundColor }) {
       <button onClick={addCircle}>Circle</button>
       <button onClick={addStar}>Star</button>
       <button onClick={addText}>Text</button>
+      <button onClick={handleDeleteElement}>Delete</button>
     </div>
   )
 }

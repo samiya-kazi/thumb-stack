@@ -37,10 +37,25 @@ function Editor () {
   };
 
 
+  const handleDeleteElement = () => {
+    if(selectedId) {
+      setShapes((prevlist) => {
+        const newlist = prevlist.filter((shape) => shape.id !== selectedId);
+        setSelectedId(null);
+        return newlist;
+      })
+    }
+  }
+
+
   return (
     <>
     <div className='editor'>
-      <Toolbar setShapes={setShapes} setBackgroundColor={setBackgroundColor}/>
+      <Toolbar 
+        setShapes={setShapes} 
+        setBackgroundColor={setBackgroundColor}
+        handleDeleteElement={handleDeleteElement}
+        />
       <div>
         <div className='drawing-stage'>
           <Stage width={640} height={350} onMouseDown={checkDeselect} onTouchStart={checkDeselect} ref={stageRef}>
