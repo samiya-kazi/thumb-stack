@@ -22,3 +22,10 @@ export function saveThumbnail (thumbnailElements, backgroundColor) {
     .then(response => response.json())
     .catch(err => console.log(err));
 }
+
+
+export function getThumbnails (userId) {
+  return fetch(`${BASE_URL}/thumbnail/${userId}`)
+    .then(response => response.json())
+    .catch(err => console.log(err));
+}

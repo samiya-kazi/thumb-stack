@@ -1,18 +1,30 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Stage, Layer, Rect } from 'react-konva';
 import { saveThumbnail } from '../Services/thumbnail';
 import ShapeElement from './ShapeElement';
 import TextElement from './TextElement';
 import Toolbar from './Toolbar';
 
-function Editor () {
+function Editor ({ selectedThumbnail }) {
 
-  const [shapes, setShapes] = useState([]);
+  const [shapes, setShapes] = useState(selectedThumbnail ? selectedThumbnail.elements : []);
   const [selectedId, setSelectedId] = useState(null);
-  const [backgroundColor, setBackgroundColor] = useState('white');
+  const [backgroundColor, setBackgroundColor] = useState(selectedThumbnail ? selectedThumbnail.background : '#ffffff');
 
   const stageRef = useRef();
   const bgRef = useRef();
+
+
+  useEffect(() => {
+    if (selectedThumbnail) {
+      setShapes(selectedThumbnail.elements);
+      setBackgroundColor(selectedThumbnail.background);
+    } else {
+      setShapes([]);
+      setBackgroundColor('#ffffff');
+    }
+  }, [selectedThumbnail])
+
 
   const checkDeselect = (e) => {
     // deselect when clicked on empty area

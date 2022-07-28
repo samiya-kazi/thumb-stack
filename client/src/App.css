@@ -46,3 +46,15 @@
   display: flex;
   justify-content: space-around;
 }
+
+.thumbnail-container {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border: black solid 1px;
+  margin: 10px;
+}
+
+.thumbnail-container > * {
+  margin: 10px;
+}
