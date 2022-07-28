@@ -18,6 +18,8 @@ function TextElement ({ shape, setShapes, isSelected, onSelect }) {
     }
   }, [isSelected]);
 
+
+
   function handleDragEnd (event) {
 
     setShapes((prevlist) => {
@@ -31,6 +33,7 @@ function TextElement ({ shape, setShapes, isSelected, onSelect }) {
       return newlist;
     })
   }
+
 
 
   function setTransformation () {
@@ -64,6 +67,8 @@ function TextElement ({ shape, setShapes, isSelected, onSelect }) {
     })
   }
 
+
+
   function handleSubmit (text) {
     if(isEdit) {
       setShapes((prevlist) => {
@@ -82,6 +87,8 @@ function TextElement ({ shape, setShapes, isSelected, onSelect }) {
     }  
   }
 
+
+
   function changeText (e) {
     const stage = e.target.getStage();
 
@@ -92,9 +99,12 @@ function TextElement ({ shape, setShapes, isSelected, onSelect }) {
     setIsEdit(true);
   }
 
+
+  
   function removeTextarea () {
     if(shapeRef.current) {
       shapeRef.current.show();
+      trRef.current.show();
       setIsEdit(false);
     }
   }

@@ -94,6 +94,9 @@ function Editor () {
             </Layer>
           </Stage>
         </div>
+        <div>
+          640 x 350
+        </div>
         <div className='button-container'>
           <button onClick={handleExport}>Save Image</button>
         </div>
