@@ -129,6 +129,7 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
 
   return (
     <div className="toolbar">
+      <h3>Toolbar</h3>
       <div>
         <label>BG:</label>
         <input className='color-picker' type='color' onChange={handleBackgroundChange} defaultValue="#ffffff"/>
@@ -139,14 +140,14 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
         <input className='color-picker' type='color' onChange={handleColorChange} />
       </div>
 
-      <div>
+      <div className="full-input">
         <label>Fill Opacity:</label>
-        <input type="range" min="0" max="1" step="0.1" onChange={handleOpacityChange} />
+        <input type="range" min="0" max="1" step="0.1" onChange={handleOpacityChange} className="opacity-range" />
       </div>
 
-      <div>
+      <div className="full-input">
         <label>Font:</label>
-        <select onChange={handleFontChange}>
+        <select onChange={handleFontChange} className='font-selector'>
           <option style={{fontFamily: "Calibri"}}>Calibri</option>
           <option style={{fontFamily: "Georgia"}}>Georgia</option>
           <option style={{fontFamily: "Courier New"}}>Courier New</option>

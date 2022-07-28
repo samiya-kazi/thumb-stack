@@ -3,7 +3,7 @@
   height: 100vh;
   display: flex;
   justify-content: center;
-  background-color: lightseagreen;
+  background-color: rgb(132, 197, 194);
   min-width:fit-content;
   min-height: fit-content;
 }
@@ -25,9 +25,10 @@
 }
 
 .toolbar {
-  width: 120px;
+  width: 150px;
   height: 90%;
-  border: grey solid 1px;
+  border: rgb(175, 175, 175) solid 1px;
+  border-radius: 10px;
   margin: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -57,4 +58,32 @@
 
 .thumbnail-container > * {
   margin: 10px;
+}
+
+button {
+  padding: 0.5rem;
+  background-color: white;
+  border: rgb(45, 173, 228) solid 2px;
+  border-radius: 10px;
+}
+
+button:active {
+  background-color: grey;
+  color: white;
+}
+
+.full-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.opacity-range {
+  width: 90%;
+  border: black solid 1px;
+}
+
+.font-selector {
+  width: 90%;
+  padding: 5px;
 }

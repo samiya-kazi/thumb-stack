@@ -136,7 +136,7 @@ function Editor ({ selectedThumbnail, setThumbnails }) {
         </div>
         <div className='button-container'>
           <button onClick={handleExport}>Download Image</button>
-          <button onClick={handlePost}>Save Image</button>
+          <button onClick={handlePost}>{selectedThumbnail ? 'Update' : 'Save' }</button>
         </div>
       </div>
     </div>
