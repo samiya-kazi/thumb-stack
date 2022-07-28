@@ -41,3 +41,8 @@
 .color-picker {
   margin-left: 0.3rem;
 }
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+}

@@ -41,21 +41,22 @@ function Editor () {
     <>
     <div className='editor'>
       <Toolbar setShapes={setShapes} setBackgroundColor={setBackgroundColor}/>
-      <div className='drawing-stage'>
-        <Stage width={640} height={350} onMouseDown={checkDeselect} onTouchStart={checkDeselect} ref={stageRef}>
-          <Layer>
-            <Rect 
-              id='background'
-              width={640}
-              height={350}
-              fill={backgroundColor}
-              draggable={false}
-              ref={bgRef}
-            />
-            {shapes.map((shape) => {
-              switch (shape.type) {
-                case 'square':
-                  return <SquareElement 
+      <div>
+        <div className='drawing-stage'>
+          <Stage width={640} height={350} onMouseDown={checkDeselect} onTouchStart={checkDeselect} ref={stageRef}>
+            <Layer>
+              <Rect 
+                id='background'
+                width={640}
+                height={350}
+                fill={backgroundColor}
+                draggable={false}
+                ref={bgRef}
+                />
+              {shapes.map((shape) => {
+                switch (shape.type) {
+                  case 'square':
+                    return <SquareElement 
                     shape={shape} 
                     setShapes={setShapes} 
                     key={shape.key} 
@@ -64,49 +65,52 @@ function Editor () {
                       setSelectedId(shape.id);
                     }}
                     />
+                    
+                    case 'circle':
+                      return <CircleElement 
+                      shape={shape} 
+                      setShapes={setShapes} 
+                      key={shape.key} 
+                      isSelected={shape.id === selectedId}
+                      onSelect={() => {
+                        setSelectedId(shape.id);
+                      }}
+                      />
+                      
+                    case 'star':
+                      return <StarElement 
+                      shape={shape} 
+                      setShapes={setShapes} 
+                      key={shape.key} 
+                      isSelected={shape.id === selectedId}
+                      onSelect={() => {
+                        setSelectedId(shape.id);
+                      }}
+                      />
 
-                case 'circle':
-                  return <CircleElement 
-                    shape={shape} 
-                    setShapes={setShapes} 
-                    key={shape.key} 
-                    isSelected={shape.id === selectedId}
-                    onSelect={() => {
-                      setSelectedId(shape.id);
-                    }}
-                    />
+                    case 'text':
+                      return <TextElement 
+                      shape={shape} 
+                      setShapes={setShapes} 
+                      key={shape.key} 
+                      isSelected={shape.id === selectedId}
+                      onSelect={() => {
+                        setSelectedId(shape.id);
+                      }}
+                      />
 
-                case 'star':
-                  return <StarElement 
-                    shape={shape} 
-                    setShapes={setShapes} 
-                    key={shape.key} 
-                    isSelected={shape.id === selectedId}
-                    onSelect={() => {
-                      setSelectedId(shape.id);
-                    }}
-                    />
-
-                case 'text':
-                  return <TextElement 
-                    shape={shape} 
-                    setShapes={setShapes} 
-                    key={shape.key} 
-                    isSelected={shape.id === selectedId}
-                    onSelect={() => {
-                      setSelectedId(shape.id);
-                    }}
-                    />
-
-                default: return null;
-              }
-            })}
-          </Layer>
-        </Stage>
+                    default: return null;
+                  }
+              })}
+            </Layer>
+          </Stage>
+        </div>
+        <div className='button-container'>
+          <button onClick={handleExport}>Save Image</button>
+        </div>
       </div>
     </div>
     <div>
-      <button onClick={handleExport}>Save Image</button>
     </div>
     </>
   )

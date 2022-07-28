@@ -3,6 +3,7 @@ import { useState } from "react";
 function Toolbar ({ setShapes, setBackgroundColor }) {
 
   const [fillColor, setFillColor] = useState('#000000')
+  const [font, setFont] = useState('Calibri');
 
   function handleColorChange (event) {
     setFillColor(event.target.value)
@@ -10,6 +11,10 @@ function Toolbar ({ setShapes, setBackgroundColor }) {
 
   function handleBackgroundChange (event) {
     setBackgroundColor(event.target.value)
+  }
+
+  function handleFontChange(event) {
+    setFont(event.target.value)
   }
 
 
@@ -101,7 +106,7 @@ function Toolbar ({ setShapes, setBackgroundColor }) {
         y: 20,
         text: 'Add text',
         fontSize: 30,
-        fontFamily: 'Calibri',
+        fontFamily: font,
         fill: fillColor,
         draggable: true, 
       }
@@ -124,6 +129,18 @@ function Toolbar ({ setShapes, setBackgroundColor }) {
         <label>Fill:</label>
         <input className='color-picker' type='color' onChange={handleColorChange} />
       </div>
+
+      <div>
+        <label>Font:</label>
+        <select onChange={handleFontChange}>
+          <option style={{fontFamily: "Calibri"}}>Calibri</option>
+          <option style={{fontFamily: "Georgia"}}>Georgia</option>
+          <option style={{fontFamily: "Courier New"}}>Courier New</option>
+          <option style={{fontFamily: "Impact"}}>Impact</option>
+          <option style={{fontFamily: "Brush Script MT"}}>Brush Script MT</option>
+        </select>
+      </div>
+
       <button onClick={addSquare}>Square</button>
       <button onClick={addCircle}>Circle</button>
       <button onClick={addStar}>Star</button>

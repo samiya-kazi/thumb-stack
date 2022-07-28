@@ -41,6 +41,7 @@ function TextElement ({ shape, setShapes, isSelected, onSelect }) {
 
     const x = node.x();
     const y = node.y();
+    const fontSize = Math.max(10, node.fontSize() * scaleX);
     const width = Math.max(10, node.width() * scaleX);
     const height= Math.max(10, node.height() * scaleY);
 
@@ -52,6 +53,7 @@ function TextElement ({ shape, setShapes, isSelected, onSelect }) {
         y,
         width,
         height,
+        fontSize,
       })
 
       return newlist;
@@ -84,17 +86,15 @@ function TextElement ({ shape, setShapes, isSelected, onSelect }) {
     };
 
     // create textarea and style it
-    var textarea = document.createElement('textarea');
+    let textarea = document.createElement('textarea');
     document.body.appendChild(textarea);
 
     textarea.value = shapeRef.current.text();
         textarea.style.position = 'absolute';
         textarea.style.top = areaPosition.y + 'px';
         textarea.style.left = areaPosition.x + 'px';
-        // textarea.style.width = shapeRef.current.width() - shapeRef.current.padding() * 2 + 'px';
         textarea.style.maxWidth = stage.width();
-        textarea.style.height =
-          shapeRef.current.height() - shapeRef.current.padding() * 2 + 5 + 'px';
+        textarea.style.height = shapeRef.current.height() - shapeRef.current.padding() * 2 + 5 + 'px';
         textarea.style.fontSize = shapeRef.current.fontSize() + 'px';
         textarea.style.border = 'none';
         textarea.style.padding = '0px';
@@ -114,6 +114,7 @@ function TextElement ({ shape, setShapes, isSelected, onSelect }) {
           transform += 'rotateZ(' + rotation + 'deg)';
         }
 
+        textarea.style.transform = transform;
     textarea.focus();
 
     textarea.addEventListener('keydown', function (e) {
