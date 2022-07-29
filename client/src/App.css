@@ -1,11 +1,5 @@
 .App {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  background-color: rgb(132, 197, 194);
-  min-width:fit-content;
-  min-height: fit-content;
+
 }
 
 .editor {
@@ -104,4 +98,30 @@ input[type="file"] {
 .custom-file-upload:active {
   background-color: grey;
   color: white;
+}
+
+.nav {
+  display: flex;
+  width: 100%;
+  background-color: rgb(46, 139, 139);
+  height: 10vh;
+}
+
+.main-container {
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(132, 197, 194);
+  min-width:fit-content;
+  min-height: fit-content;
+}
+
+.logo {
+  height: fit-content;
+  width: fit-content;
+  padding: 1rem;
+  color: white;
+  align-self: center;
+  font-size: x-large;
 }

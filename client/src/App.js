@@ -1,10 +1,15 @@
 import './App.css';
-import Dashboard from './Components/Dashboard';
+import { BrowserRouter as Router } from 'react-router-dom';
+import MainComponent from './Components/MainComponent';
+import Navbar from './Components/Navbar';
 
 function App() {
   return (
     <div className="App">
-      <Dashboard />
+      <Router>
+        <Navbar />
+        <MainComponent />
+      </Router>
     </div>
   );
 }

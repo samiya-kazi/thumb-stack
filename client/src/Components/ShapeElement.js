@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import { Circle, Image, Rect, Star, Transformer } from "react-konva"
 
 function ShapeElement ({ shape, setShapes, isSelected, onSelect }) {
