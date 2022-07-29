@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const thumbnailController = require('./controllers/thumbnail');
 const userController = require('./controllers/user');
+const authMiddleware = require('./middlewares/auth');
 
 router.get('/thumbnail/:userId', thumbnailController.getThumbnails);
 router.post('/thumbnail', thumbnailController.postThumbnail);
