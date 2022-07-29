@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <Router>
         <Navbar isAuth={isAuth} setIsAuth={setIsAuth} />
-        <MainComponent IsAuth={isAuth} setIsAuth={setIsAuth} />
+        <MainComponent isAuth={isAuth} setIsAuth={setIsAuth} />
       </Router>
     </div>
   );

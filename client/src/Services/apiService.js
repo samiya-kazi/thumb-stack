@@ -1,9 +1,9 @@
 
 const BASE_URL = 'http://localhost:3001'
 
-export function saveThumbnail (thumbnailElements, backgroundColor) {
+export function saveThumbnail (thumbnailElements, backgroundColor, userId) {
   const body = {
-    userId: 'user123',
+    userId,
     elements: thumbnailElements,
     background: backgroundColor
   }

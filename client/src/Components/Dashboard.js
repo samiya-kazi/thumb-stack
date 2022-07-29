@@ -1,23 +1,34 @@
 import { useEffect, useState } from 'react';
-import { getThumbnails } from '../Services/apiService';
+import { getThumbnails, getUserInfo } from '../Services/apiService';
 import Editor from './Editor';
 import SavedThumbnails from './SavedThumbnails';
 
-function Dashboard () {
+function Dashboard ({ isAuth }) {
 
   const [thumbnails, setThumbnails] = useState([]);
   const [selectedThumbnail, setSelectedThumbnail] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    getThumbnails('user123')
-      .then(data => setThumbnails(data))
-      .catch(err => console.log(err));
-  }, [])
+    if (isAuth) {
+      getUserInfo()
+        .then(user => {
+          setUser(user);
+          getThumbnails(user._id)
+            .then(data => setThumbnails(data))
+            .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
+    } else {
+      setUser(null);
+    }
+  }, []);
+
 
   return (
     <>
     <SavedThumbnails thumbnails={thumbnails} setSelectedThumbnail={setSelectedThumbnail} />
-    <Editor selectedThumbnail={selectedThumbnail} setThumbnails={setThumbnails} />
+    <Editor selectedThumbnail={selectedThumbnail} setThumbnails={setThumbnails} user={user} />
     </>
   )
 }

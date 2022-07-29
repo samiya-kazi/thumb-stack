@@ -53,7 +53,7 @@ function Login ({ setIsAuth }) {
         </div>
         <div>
           <label>Password:</label>
-          <input type='Password' onChange={handleChange}name='password' />
+          <input type='Password' onChange={handleChange}name='password'/>
         </div>
         <button type="submit">Login</button>
       </form>

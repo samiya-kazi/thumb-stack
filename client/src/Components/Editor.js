@@ -5,7 +5,7 @@ import ShapeElement from './ShapeElement';
 import TextElement from './TextElement';
 import Toolbar from './Toolbar';
 
-function Editor ({ selectedThumbnail, setThumbnails }) {
+function Editor ({ selectedThumbnail, setThumbnails, user }) {
 
   const [shapes, setShapes] = useState(selectedThumbnail ? selectedThumbnail.elements : []);
   const [selectedId, setSelectedId] = useState(null);
@@ -73,7 +73,7 @@ function Editor ({ selectedThumbnail, setThumbnails }) {
           })
         });
     } else {
-      saveThumbnail(shapes, backgroundColor)
+      saveThumbnail(shapes, backgroundColor, user._id)
         .then((newThumbnail) => {
           setThumbnails(prevlist => [...prevlist, newThumbnail])
         });
