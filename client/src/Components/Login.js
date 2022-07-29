@@ -25,22 +25,27 @@ function Login ({ setIsAuth }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    login(state)
-    .then(res => {
-      if(!res) {
-        setErrorMessage('Incorrect login information.')
-      } else {
-        // This sets isAuthenticated = true and redirects to profile
-        setIsAuth(true);
-        auth.login(() => navigate('/dashboard'));
-      }
-    })
-    .catch(err => console.log(err))
+    if(validateForm()) {
+      login(state)
+      .then(res => {
+        if(!res) {
+          setErrorMessage('Incorrect login information.')
+        } else {
+          // This sets isAuthenticated = true and redirects to profile
+          setIsAuth(true);
+          auth.login(() => navigate('/dashboard'));
+        }
+      })
+      .catch(err => console.log(err))
+    } else {
+      setErrorMessage('Please enter e-mail and password.')
+    }
+
 
   };
 
   const validateForm = () => {
-    return !state.email || !state.password;
+    return state.email && state.password;
   };
 
   return (
@@ -56,8 +61,8 @@ function Login ({ setIsAuth }) {
           <input type='Password' onChange={handleChange}name='password'/>
         </div>
         <button type="submit">Login</button>
+        <div>{errorMessage}</div>
       </form>
-      <div>{errorMessage}</div>
     </div>
   )
 }

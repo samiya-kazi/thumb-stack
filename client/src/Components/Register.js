@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const initialState = {
   email: '',
   password: '',
+  confirmPassword: '',
   firstName: '',
   lastName: '',
 };
@@ -28,24 +29,33 @@ function Register ({ setIsAuth }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    register(state)
-    .then(res => {
-      if(!res) {
-        setErrorMessage('Incorrect login information.')
-      } else {
-        // This sets isAuthenticated = true and redirects to profile
-        console.log(res);
-        setIsAuth(true);
-        auth.login(() => navigate('/dashboard'));
-      }
-    })
-    .catch(err => console.log(err))
-
+    if(validateForm()) {
+      register(state)
+      .then(res => {
+        if(!res) {
+          setErrorMessage('Incorrect login information.')
+        } else {
+          // This sets isAuthenticated = true and redirects to profile
+          console.log(res);
+          setIsAuth(true);
+          auth.login(() => navigate('/dashboard'));
+        }
+      })
+      .catch(err => console.log(err))
+    }
   };
+
 
   const validateForm = () => {
-    return !state.email || !state.password;
+    if(state.password !== state.confirmPassword) {
+      setErrorMessage('Passwords do not match.');
+      return false;
+    } 
+
+    return true;
   };
+
+
 
   return (
     <div className="form-container">
@@ -53,25 +63,26 @@ function Register ({ setIsAuth }) {
         <h1>Register</h1>
         <div>
           <label>First Name:</label>
-          <input type='text' name="firstName" onChange={handleChange} />
+          <input type='text' name="firstName" onChange={handleChange} required={true} />
         </div>
         <div>
           <label>Last Name:</label>
-          <input type='text' name="lastName" onChange={handleChange}/>
+          <input type='text' name="lastName" onChange={handleChange} required={true} />
         </div>
         <div>
           <label>E-mail:</label>
-          <input type='email' name="email" onChange={handleChange} />
+          <input type='email' name="email" onChange={handleChange} required={true} />
         </div>
         <div>
           <label>Password:</label>
-          <input type='password' name="password" onChange={handleChange} />
+          <input type='password' name="password" onChange={handleChange} required={true} />
         </div>
         <div>
           <label>Confirm Password:</label>
-          <input type='password' name="confirmPassword" onChange={handleChange} />
+          <input type='password' name="confirmPassword" onChange={handleChange} required={true} />
         </div>
         <button type="submit">Register</button>
+        <div>{errorMessage}</div>
       </form>
     </div>
   )
