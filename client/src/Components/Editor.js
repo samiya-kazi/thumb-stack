@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Stage, Layer, Rect } from 'react-konva';
-import { saveThumbnail, updateThumbnail } from '../Services/thumbnail';
+import { saveThumbnail, updateThumbnail } from '../Services/apiService';
 import ShapeElement from './ShapeElement';
 import TextElement from './TextElement';
 import Toolbar from './Toolbar';

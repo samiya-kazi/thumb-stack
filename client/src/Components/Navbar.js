@@ -1,19 +1,46 @@
+import auth from '../utils/auth';
 import { Link } from "react-router-dom";
+import { logout } from "../Services/apiService";
+import { useNavigate } from 'react-router-dom';
 
-function Navbar () {
+function Navbar ({ isAuth, setIsAuth }) {
+
+  let navigate = useNavigate();
+
+  function handleLogout () {
+    logout();
+    handleAuth();
+  }
+
+  function handleAuth () {
+    setIsAuth(false);
+    auth.logout(() => navigate('/'));
+  };
+
+
   return (
     <div className="nav">
-      <Link to="/">
-        <div className="logo">ThumbStack</div>
-      </Link>
+      <div className="logo">
+        <Link to="/">
+          <div className="logo">ThumbStack</div>
+        </Link>
+      </div>
       <nav>
         <ul>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
+          {isAuth ? 
+          (<li>
+            <Link onClick={handleLogout}>Logout</Link>
+          </li>)
+          :
+          (<>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+          </>
+          )}
         </ul>
       </nav>
     </div>

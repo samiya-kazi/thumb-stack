@@ -100,6 +100,7 @@ input[type="file"] {
 
 .nav {
   display: flex;
+  justify-content: space-between;
   width: 100%;
   background-color: rgb(26, 104, 104);
   height: 10vh;
@@ -163,3 +164,20 @@ input[type="file"] {
 .form-container > form > h1,button {
   align-self: center;
 }
+
+
+a {
+  text-decoration: none;
+  color: #fafafa;
+}
+
+nav > ul {
+  display: flex;
+  align-self: center;
+  list-style: none;
+}
+
+li {
+  padding: 0 1rem;
+}
+

@@ -67,4 +67,14 @@ const logout = (req, res) => {
 };
 
 
-module.exports = { create, login, logout };
+const getUserInfo = (req,res) => {
+  try {
+    res.status(200).send(req.user);
+  } catch (error) {
+    res.status(500);
+    console.log(error);
+  }
+}
+
+
+module.exports = { create, login, logout, getUserInfo };

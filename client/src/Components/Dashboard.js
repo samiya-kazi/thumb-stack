@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getThumbnails } from '../Services/thumbnail';
+import { getThumbnails } from '../Services/apiService';
 import Editor from './Editor';
 import SavedThumbnails from './SavedThumbnails';
 

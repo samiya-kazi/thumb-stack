@@ -48,3 +48,42 @@ export function updateThumbnail (id, thumbnailElements, backgroundColor) {
     .then(response => response.json())
     .catch(err => console.log(err));
 }
+
+
+export function getUserInfo () {
+  return fetch(`${BASE_URL}/user`,{
+     method: 'GET',
+     credentials: 'include'
+   })
+   .then(response => response.json())
+   .catch(err => console.error(err));
+};
+
+
+export function logout () {
+  return fetch(`${BASE_URL}/logout`, {
+     method: 'GET',
+     credentials: 'include'
+   })
+   .then(response => response.json())
+   .catch(err => console.error(err));
+};
+
+
+export function login (user) {
+  const options = {
+   method: 'POST',
+   body: JSON.stringify(user),
+   headers: {
+     "Content-type": "application/json"
+   },
+   credentials: 'include'
+ };
+
+ return fetch(`${BASE_URL}/login`, options)
+   .then(response => {
+     if(response.ok)
+       return response.json()
+   })
+   .catch(err => console.error(err));
+};
