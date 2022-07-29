@@ -88,3 +88,20 @@ button:active {
   border: rgb(45, 173, 228) solid 2px;
   border-radius: 10px;
 }
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  padding: 0.5rem;
+  background-color: white;
+  border: rgb(45, 173, 228) solid 2px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.custom-file-upload:active {
+  background-color: grey;
+  color: white;
+}

@@ -22,6 +22,46 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
     setOpacity(event.target.value);
   }
 
+
+  function handleUpload(event) {
+    var URL = window.webkitURL || window.URL;
+    var url = URL.createObjectURL(event.target.files[0]);
+    var img = new Image();
+    img.src = url;
+
+
+    img.onload = function() {
+
+      var img_width = img.width;
+      var img_height = img.height;
+
+      // calculate dimensions to get max 300px
+      var max = 300;
+      var ratio = (img_width > img_height ? (img_width / max) : (img_height / max));
+
+      setShapes((prevlist) => {
+
+        const newId = prevlist.length ? prevlist[prevlist.length - 1].key + 1 : 1;
+  
+        const newImg = {
+          type: 'image',
+          id:  JSON.stringify(newId),
+          key: newId,
+          image: img,
+          x: 50,
+          y: 30,
+          width: img_width/ratio,
+          height: img_height/ratio,
+          draggable: true,
+        }
+
+        return [...prevlist, newImg]
+      })
+    }
+    
+  }
+
+
   function getRGBA () {
     const rgbaCol = 'rgba(' + parseInt(fillColor.slice(-6, -4), 16) + ',' + parseInt(fillColor.slice(-4, -2), 16) + ',' + parseInt(fillColor.slice(-2), 16) + ',' + opacity + ')';
     return rgbaCol;
@@ -160,6 +200,10 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
       <button onClick={addCircle}>Circle</button>
       <button onClick={addStar}>Star</button>
       <button onClick={addText}>Text</button>
+      <label class="custom-file-upload">
+        <input type="file" id="file_input" onChange={handleUpload}></input>
+        Upload Image
+      </label>
       <button onClick={handleDeleteElement}>Delete</button>
     </div>
   )

@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { Circle, Rect, Star, Transformer } from "react-konva"
+import { Circle, Image, Rect, Star, Transformer } from "react-konva"
 
 function ShapeElement ({ shape, setShapes, isSelected, onSelect }) {
 
@@ -91,7 +91,16 @@ function ShapeElement ({ shape, setShapes, isSelected, onSelect }) {
         ref={shapeRef}
         onTransformEnd={setTransformation}
       />)
-  : 
+  : shape.type === 'image' ? 
+    (<Image
+      {...shape}
+      onDragEnd = {handleDragEnd}
+      onClick={onSelect}
+      onTap={onSelect}
+      ref={shapeRef}
+      onTransformEnd={setTransformation}
+    />)
+  :
     null 
   }
     
