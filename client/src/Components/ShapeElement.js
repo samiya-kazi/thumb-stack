@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Circle, Image, Rect, Star, Transformer } from "react-konva"
 
 function ShapeElement ({ shape, setShapes, isSelected, onSelect }) {
@@ -13,6 +13,7 @@ function ShapeElement ({ shape, setShapes, isSelected, onSelect }) {
       trRef.current.getLayer().batchDraw();
     }
   }, [isSelected]);
+
 
   function handleDragEnd (event) {
 

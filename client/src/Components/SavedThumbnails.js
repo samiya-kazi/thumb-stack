@@ -7,7 +7,7 @@ function SavedThumbnails ({ thumbnails, setSelectedThumbnail }) {
 
       <button key='new' onClick={() => {setSelectedThumbnail(null)}}>New</button>
 
-      {thumbnails.map((thumbnail, key) => {
+      {thumbnails && thumbnails.map((thumbnail, key) => {
         return <button key={key} onClick={() => {setSelectedThumbnail(thumbnail)}}>{key + 1}</button>
       })}
 

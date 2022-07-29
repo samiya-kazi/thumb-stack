@@ -2,25 +2,28 @@ import { useState } from "react";
 
 function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
 
-  const [fillColor, setFillColor] = useState('#000000');
-  const [opacity, setOpacity] = useState('1');
-  const [font, setFont] = useState('Calibri');
+  const [state, setState] = useState({fill: '#000000', opacity: '1', font: 'Calibri'});
 
-  function handleColorChange (event) {
-    setFillColor(event.target.value)
+  function handleChange (event) {
+    const { name, value } = event.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   }
 
   function handleBackgroundChange (event) {
     setBackgroundColor(event.target.value)
   }
+  
 
-  function handleFontChange(event) {
-    setFont(event.target.value)
+
+  function getRGBA () {
+    const rgbaCol = 'rgba(' + parseInt(state.fill.slice(-6, -4), 16) + ',' + parseInt(state.fill.slice(-4, -2), 16) + ',' + parseInt(state.fill.slice(-2), 16) + ',' + state.opacity + ')';
+    return rgbaCol;
   }
 
-  function handleOpacityChange (event) {
-    setOpacity(event.target.value);
-  }
+
 
 
   function handleUpload(event) {
@@ -62,10 +65,6 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
   }
 
 
-  function getRGBA () {
-    const rgbaCol = 'rgba(' + parseInt(fillColor.slice(-6, -4), 16) + ',' + parseInt(fillColor.slice(-4, -2), 16) + ',' + parseInt(fillColor.slice(-2), 16) + ',' + opacity + ')';
-    return rgbaCol;
-  }
 
 
   function addSquare (event) {
@@ -155,7 +154,7 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
         y: 20,
         text: 'Add text',
         fontSize: 30,
-        fontFamily: font,
+        fontFamily: state.font,
         fill: getRGBA(),
         draggable: true, 
       }
@@ -177,17 +176,17 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
 
       <div>
         <label>Fill:</label>
-        <input className='color-picker' type='color' onChange={handleColorChange} />
+        <input className='color-picker' type='color' onChange={handleChange} name='fill' />
       </div>
 
       <div className="full-input">
         <label>Fill Opacity:</label>
-        <input type="range" min="0" max="1" step="0.1" onChange={handleOpacityChange} className="opacity-range" />
+        <input type="range" min="0" max="1" step="0.1" onChange={handleChange} className="opacity-range" name='opacity' />
       </div>
 
       <div className="full-input">
         <label>Font:</label>
-        <select onChange={handleFontChange} className='font-selector'>
+        <select onChange={handleChange} className='font-selector' name='font' >
           <option style={{fontFamily: "Calibri"}}>Calibri</option>
           <option style={{fontFamily: "Georgia"}}>Georgia</option>
           <option style={{fontFamily: "Courier New"}}>Courier New</option>
@@ -200,7 +199,7 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
       <button onClick={addCircle}>Circle</button>
       <button onClick={addStar}>Star</button>
       <button onClick={addText}>Text</button>
-      <label class="custom-file-upload">
+      <label className="custom-file-upload">
         <input type="file" id="file_input" onChange={handleUpload}></input>
         Upload Image
       </label>
