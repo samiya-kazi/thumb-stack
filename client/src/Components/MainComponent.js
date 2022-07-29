@@ -35,7 +35,7 @@ function MainComponent ({ isAuth, setIsAuth }) {
       />
       <Route
         path="/register"
-        element={<Register />}
+        element={<Register setIsAuth={setIsAuth} />}
         />
       <Route
         path="/"

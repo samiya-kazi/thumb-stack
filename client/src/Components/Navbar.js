@@ -29,7 +29,7 @@ function Navbar ({ isAuth, setIsAuth }) {
         <ul>
           {isAuth ? 
           (<li>
-            <Link onClick={handleLogout}>Logout</Link>
+            <a onClick={handleLogout}>Logout</a>
           </li>)
           :
           (<>

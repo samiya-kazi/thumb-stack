@@ -65,7 +65,7 @@ export function logout () {
      method: 'GET',
      credentials: 'include'
    })
-   .then(response => response.json())
+   .then(response => response)
    .catch(err => console.error(err));
 };
 
@@ -80,10 +80,36 @@ export function login (user) {
    credentials: 'include'
  };
 
- return fetch(`${BASE_URL}/login`, options)
-   .then(response => {
-     if(response.ok)
-       return response.json()
-   })
-   .catch(err => console.error(err));
+  return fetch(`${BASE_URL}/login`, options)
+    .then(response => {
+      if(response.ok)
+        return response.json()
+    })
+    .catch(err => console.error(err));
+};
+
+
+export function register (registerInfo) {
+  const user = {
+    email: registerInfo.email,
+    password: registerInfo.password,
+    firstName: registerInfo.firstName,
+    lastName: registerInfo.lastName,
+  }
+
+  const options = {
+		method: 'POST',
+    body: JSON.stringify(user),
+		headers: {
+      "Content-type": "application/json"
+    },
+    credentials: 'include'
+	};
+
+  return fetch(`${BASE_URL}/register`, options)
+    .then(response => {
+      if(response.ok)
+        return response.json();
+    })
+    .catch(err => console.error(err));
 };

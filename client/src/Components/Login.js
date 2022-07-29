@@ -49,11 +49,11 @@ function Login ({ setIsAuth }) {
         <h1>Login</h1>
         <div>
           <label>E-mail:</label>
-          <input type='email' onChange={handleChange} />
+          <input type='email' onChange={handleChange} name='email' />
         </div>
         <div>
           <label>Password:</label>
-          <input type='Password' onChange={handleChange} />
+          <input type='Password' onChange={handleChange}name='password' />
         </div>
         <button type="submit">Login</button>
       </form>
