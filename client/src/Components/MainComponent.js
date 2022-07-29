@@ -7,6 +7,8 @@ import Register from "./Register";
 
 function MainComponent () {
   return (
+    <div className='main-container'>
+
     <Routes>
       <Route
         path="/dashboard"
@@ -19,12 +21,13 @@ function MainComponent () {
       <Route
         path="/register"
         element={<Register />}
-      />
+        />
       <Route
         path="/"
         element={<Home />}
-      />
+        />
     </Routes>
+    </div>
   )
 }
 

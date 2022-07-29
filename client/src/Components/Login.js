@@ -1,8 +1,19 @@
 function Login () {
   return (
-    <>
-      <h1>Login Page</h1>
-    </>
+    <div className="form-container">
+      <form>
+        <h1>Login</h1>
+        <div>
+          <label>E-mail:</label>
+          <input type='email' />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input type='Password' />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
   )
 }
 
