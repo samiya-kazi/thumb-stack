@@ -49,7 +49,6 @@ function TextEditor ({ shapeRef, stage, handleSubmit }) {
 
   function handleOutsideClick(e) {
     if (e.target !== textarea) {
-      handleSubmit(textarea.value);
       textarea.remove();
     }
   }

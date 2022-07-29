@@ -72,7 +72,7 @@ function TextElement ({ shape, setShapes, isSelected, onSelect }) {
   function handleSubmit (text) {
     if(isEdit) {
       setShapes((prevlist) => {
-        const newlist = [...prevlist].map((listshape) => {
+        const newlist = prevlist.map((listshape) => {
           if(listshape.id === shape.id)
             listshape.text = text;
   
@@ -93,6 +93,7 @@ function TextElement ({ shape, setShapes, isSelected, onSelect }) {
     const stage = e.target.getStage();
 
     shapeRef.current.hide();
+    console.log('Hide text.');
     trRef.current.hide();
 
     setStage(stage);
@@ -104,8 +105,11 @@ function TextElement ({ shape, setShapes, isSelected, onSelect }) {
   function removeTextarea () {
     if(shapeRef.current) {
       shapeRef.current.show();
-      trRef.current.show();
-      setIsEdit(false);
+      console.log('Show text.');
+
+      if(trRef.current) {
+        trRef.current.show();
+      }
     }
   }
 
@@ -144,6 +148,7 @@ function TextElement ({ shape, setShapes, isSelected, onSelect }) {
         handleSubmit={handleSubmit}
         stage={stage}
         removeTextarea={removeTextarea}
+        isEdit={isEdit}
       />
     )
 
