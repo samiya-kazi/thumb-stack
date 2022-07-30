@@ -15,6 +15,10 @@ const thumbnailSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now()
+  },
+  imageSrc: {
+    type: String,
+    required: true
   }
 });
 

@@ -1,11 +1,12 @@
 
 const BASE_URL = 'http://localhost:3001'
 
-export function saveThumbnail (thumbnailElements, backgroundColor, userId) {
+export function saveThumbnail (thumbnailElements, backgroundColor, userId, imageSrc) {
   const body = {
     userId,
     elements: thumbnailElements,
-    background: backgroundColor
+    background: backgroundColor,
+    imageSrc: "https://res.cloudinary.com/dmpn6t2jn/image/upload/v1659189652/" + imageSrc + ".png",
   }
 
   const options = {
@@ -29,11 +30,12 @@ export function getThumbnails (userId) {
 }
 
 
-export function updateThumbnail (id, thumbnailElements, backgroundColor) {
+export function updateThumbnail (id, thumbnailElements, backgroundColor, imageSrc) {
   const body = {
     userId: 'user123',
     elements: thumbnailElements,
-    background: backgroundColor
+    background: backgroundColor,
+    imageSrc: "https://res.cloudinary.com/dmpn6t2jn/image/upload/v1659189652/" + imageSrc + ".png",
   }
 
   const options = {

@@ -40,10 +40,14 @@
 }
 
 .thumbnail-container {
+  width: 150px;
+  height: 95%;
   display: flex;
   flex-direction: column;
   background-color: white;
   margin: 10px;
+  width: fit-content;
+  overflow-y: auto;
 }
 
 .thumbnail-container > * {
@@ -193,5 +197,12 @@ li {
 
 li:hover {
   background-color: rgb(13, 52, 52);
+}
+
+.thumbnail-preview {
+  align-self: center;
+  border:rgb(13, 52, 52) solid 1px;
+  height: 100px;
+  width: 80%;
 }
 

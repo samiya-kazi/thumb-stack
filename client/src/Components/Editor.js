@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { Stage, Layer, Rect } from 'react-konva';
 import { saveThumbnail, updateThumbnail } from '../Services/apiService';
+import { thumbnailUpload } from '../Services/cloudinary';
+import { getFileFromUrl } from '../utils/fileConvert';
 import ShapeElement from './ShapeElement';
 import TextElement from './TextElement';
 import Toolbar from './Toolbar';
@@ -63,27 +65,36 @@ function Editor ({ selectedThumbnail, setThumbnails, user }) {
   }
 
   const handlePost = () => {
-    if (selectedThumbnail) {
-      updateThumbnail(selectedThumbnail._id, shapes, backgroundColor)
-        .then((newThumbnail) => {
-          setThumbnails(prevlist => {
-            const newlist = prevlist.map(tn => {
-              if(tn._id === newThumbnail._id) {
-                tn = {...newThumbnail}
-              }
-              return tn
+
+    const uri = stageRef.current.toDataURL({
+      mimeType: 'image/png',
+      quality: 0.5
+    });
+
+    getFileFromUrl(uri).then((file) => {
+      thumbnailUpload(file, user._id).then((data) => {
+        if (selectedThumbnail) {
+
+          updateThumbnail(selectedThumbnail._id, shapes, backgroundColor, data.public_id)
+            .then((newThumbnail) => {
+              setThumbnails(prevlist => {
+                const newlist = prevlist.map(tn => {
+                  if(tn._id === newThumbnail._id) {
+                    tn = {...newThumbnail}
+                  }
+                  return tn
+                });
+                return newlist;
+              })
             });
-            return newlist;
-          })
-        });
-    } else {
-      saveThumbnail(shapes, backgroundColor, user._id)
-        .then((newThumbnail) => {
-          setThumbnails(prevlist => [...prevlist, newThumbnail])
-        });
-    }
-
-
+        } else {
+          saveThumbnail(shapes, backgroundColor, user._id, data.public_id)
+            .then((newThumbnail) => {
+              setThumbnails(prevlist => [...prevlist, newThumbnail])
+            });
+        }
+      })
+    })
   } 
 
 
