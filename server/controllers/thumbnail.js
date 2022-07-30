@@ -42,8 +42,20 @@ async function updateThumbnail (req, res) {
 }
 
 
+async function deleteThumbnail (req, res) {
+  try {
+    const result = await Thumbnail.findByIdAndDelete(req.query.tid);
+    res.status(200).send(result);
+  } catch (error) {
+    res.status(500);
+    console.log(error);
+  }
+}
+
+
 module.exports = {
   getThumbnails,
   postThumbnail,
-  updateThumbnail
+  updateThumbnail,
+  deleteThumbnail
 }
