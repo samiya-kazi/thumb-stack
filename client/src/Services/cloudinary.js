@@ -6,7 +6,8 @@ export function cldUpload (event, user) {
   
   const file = event.target.files[0];
   const formData = new FormData();
-  const public_id = user._id + '_' + Date.now() + '_' + file.name;
+  const [file_name, file_type] = file.name.split('.');
+  const public_id = user._id + '_' + Date.now() + '_' + file_name;
   
   formData.append("file", file);
   formData.append("upload_preset", "rcqrwjbn");

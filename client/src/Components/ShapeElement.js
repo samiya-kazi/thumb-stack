@@ -1,10 +1,20 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Circle, Image, Rect, Star, Transformer } from "react-konva"
 
 function ShapeElement ({ shape, setShapes, isSelected, onSelect }) {
 
   const shapeRef = useRef();
   const trRef = useRef();
+
+  const [image, setImage] = useState(null);
+
+
+  useEffect(() => {
+    if (shape.type === 'image') {
+      loadImage();
+    }
+  }, []);
+
 
   useEffect(() => {
     if (isSelected) {
@@ -13,6 +23,15 @@ function ShapeElement ({ shape, setShapes, isSelected, onSelect }) {
       trRef.current.getLayer().batchDraw();
     }
   }, [isSelected]);
+
+
+  function loadImage () {
+
+    const newImage = new window.Image();
+    newImage.src = shape.imageSrc;
+    newImage.addEventListener('load', () => setImage(newImage));
+
+  }
 
 
   function handleDragEnd (event) {
@@ -95,6 +114,7 @@ function ShapeElement ({ shape, setShapes, isSelected, onSelect }) {
   : shape.type === 'image' ? 
     (<Image
       {...shape}
+      image={image}
       onDragEnd = {handleDragEnd}
       onClick={onSelect}
       onTap={onSelect}

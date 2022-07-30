@@ -30,7 +30,37 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user }) 
   function handleUpload(event) {
 
     if (user) {
-      cldUpload(event, user);
+
+      const [file_name, file_type] = event.target.files[0].name.split('.');
+
+      cldUpload(event, user)
+        .then(data => {
+          console.log(data);
+          setShapes(prevlist => {
+            const newId = prevlist.length ? prevlist[prevlist.length - 1].key + 1 : 1;
+
+            const scale = 200 / data.height;
+            const width = data.width * scale;
+            const height = 200;
+  
+            const newImg = {
+              type: 'image',
+              id:  JSON.stringify(newId),
+              key: newId,
+              imageSrc: 'https://res.cloudinary.com/dmpn6t2jn/image/upload/v1659173872/' + data.public_id + '.' + file_type,
+              x: 20,
+              y: 20,
+              height,
+              width,
+              rotation: 0,
+              draggable: true, 
+            }
+
+            return [...prevlist, newImg]
+            
+          })
+        })
+        .catch(err => console.log(err));
     }
 
   }

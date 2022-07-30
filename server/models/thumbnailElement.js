@@ -32,7 +32,7 @@ const thumbnailElementSchema = new Schema({
   fontFamily: String,
   fill: String,
   draggable: Boolean,
-  image: String
+  imageSrc: String
 });
 
 module.exports = thumbnailElementSchema
