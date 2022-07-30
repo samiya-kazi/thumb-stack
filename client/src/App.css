@@ -117,8 +117,7 @@ input[type="file"] {
 }
 
 .logo {
-  height: fit-content;
-  width: fit-content;
+  height: 100%;
   padding: 1rem;
   color: white;
   align-self: center;
@@ -171,13 +170,28 @@ a {
   color: #fafafa;
 }
 
-nav > ul {
+nav {
+  height: 100%;
+  margin: 0;
+}
+
+ul {
+  margin-top: 0;
   display: flex;
-  align-self: center;
+  align-items: center;
   list-style: none;
+  height: 100%;
 }
 
 li {
   padding: 0 1rem;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  height: 80%;
+}
+
+li:hover {
+  background-color: rgb(13, 52, 52);
 }
 

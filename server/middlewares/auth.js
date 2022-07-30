@@ -3,7 +3,6 @@ const User = require('../models/user.js');
 const authMiddleware = async (req, res, next) => {
    try {
       const uid = req.session.sid;
-      console.log('session uid in authmiddleware', uid);
 
       if(uid) {
         const user = await User.findById(uid);

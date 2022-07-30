@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { cldUpload } from "../Services/cloudinary";
 
-function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
+function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user }) {
 
   const [state, setState] = useState({fill: '#000000', opacity: '1', font: 'Calibri'});
 
@@ -27,41 +28,11 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement }) {
 
 
   function handleUpload(event) {
-    var URL = window.webkitURL || window.URL;
-    var url = URL.createObjectURL(event.target.files[0]);
-    var img = new Image();
-    img.src = url;
 
-
-    img.onload = function() {
-
-      var img_width = img.width;
-      var img_height = img.height;
-
-      // calculate dimensions to get max 300px
-      var max = 300;
-      var ratio = (img_width > img_height ? (img_width / max) : (img_height / max));
-
-      setShapes((prevlist) => {
-
-        const newId = prevlist.length ? prevlist[prevlist.length - 1].key + 1 : 1;
-  
-        const newImg = {
-          type: 'image',
-          id:  JSON.stringify(newId),
-          key: newId,
-          image: img,
-          x: 50,
-          y: 30,
-          width: img_width/ratio,
-          height: img_height/ratio,
-          draggable: true,
-        }
-
-        return [...prevlist, newImg]
-      })
+    if (user) {
+      cldUpload(event, user);
     }
-    
+
   }
 
 

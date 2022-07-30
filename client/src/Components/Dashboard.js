@@ -22,7 +22,7 @@ function Dashboard ({ isAuth }) {
     } else {
       setUser(null);
     }
-  }, []);
+  }, [isAuth]);
 
 
   return (

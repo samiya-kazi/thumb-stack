@@ -90,6 +90,7 @@ function Editor ({ selectedThumbnail, setThumbnails, user }) {
         setShapes={setShapes} 
         setBackgroundColor={setBackgroundColor}
         handleDeleteElement={handleDeleteElement}
+        user={user}
         />
       <div>
         <div className='drawing-stage'>

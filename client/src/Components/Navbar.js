@@ -28,17 +28,25 @@ function Navbar ({ isAuth, setIsAuth }) {
       <nav>
         <ul>
           {isAuth ? 
-          (<li>
-            <a onClick={handleLogout}>Logout</a>
-          </li>)
+          (<>
+              <Link to="/dashboard">
+                <li>Dashboard</li>
+              </Link>
+            
+              <div onClick={handleLogout}>
+                <li className='nav-button'>Logout</li>
+              </div>
+          </>)
           :
           (<>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
+              <Link to="/login">
+                <li>Login</li>
+              </Link>
+            
+              <Link to="/register">
+                <li>Register</li>
+              </Link>
+            
           </>
           )}
         </ul>
