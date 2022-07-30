@@ -30,6 +30,10 @@
   margin: 0.5rem 0;
 }
 
+.toolbar > div > input,select {
+  cursor: pointer;
+}
+
 .color-picker {
   margin-left: 0.3rem;
 }
@@ -37,6 +41,10 @@
 .button-container {
   display: flex;
   justify-content: space-around;
+}
+
+.button-container > button {
+  margin: 0 2rem;
 }
 
 .thumbnail-container {
@@ -60,6 +68,7 @@ button {
   border: rgb(45, 173, 228) solid 2px;
   border-radius: 10px;
   width: 80%;
+  cursor: pointer;
 }
 
 button:active {

@@ -30,7 +30,11 @@ function Dashboard ({ isAuth }) {
   return (
     <>
     <SavedThumbnails thumbnails={thumbnails} setSelectedThumbnail={setSelectedThumbnail} />
-    <Editor selectedThumbnail={selectedThumbnail} setThumbnails={setThumbnails} user={user} />
+    <Editor 
+      selectedThumbnail={selectedThumbnail} 
+      setSelectedThumbnail={setSelectedThumbnail}
+      setThumbnails={setThumbnails} 
+      user={user} />
     </>
   )
 }

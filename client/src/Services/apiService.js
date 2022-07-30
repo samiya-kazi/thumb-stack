@@ -51,6 +51,22 @@ export function updateThumbnail (id, thumbnailElements, backgroundColor, imageSr
 }
 
 
+
+
+export function deleteThumbnail (id) {
+  const options = {
+    method: 'DELETE',
+  }
+
+  return fetch(`${BASE_URL}/thumbnail?tid=${id}`, options)
+    .then(response => response.json())
+    .catch(err => console.log(err));
+}
+
+
+
+
+
 export function getUserInfo () {
   return fetch(`${BASE_URL}/user`,{
      method: 'GET',
