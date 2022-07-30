@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getThumbnails, getUserInfo } from '../Services/apiService';
 import Editor from './Editor';
 import SavedThumbnails from './SavedThumbnails';
 
 function Dashboard ({ isAuth }) {
+  let navigate = useNavigate();
 
   const [thumbnails, setThumbnails] = useState([]);
   const [selectedThumbnail, setSelectedThumbnail] = useState(null);
@@ -20,7 +22,7 @@ function Dashboard ({ isAuth }) {
         })
         .catch(err => console.log(err));
     } else {
-      setUser(null);
+      navigate('/');
     }
   }, [isAuth]);
 
