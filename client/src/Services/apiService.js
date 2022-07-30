@@ -32,7 +32,6 @@ export function getThumbnails (userId) {
 
 export function updateThumbnail (id, thumbnailElements, backgroundColor, imageSrc) {
   const body = {
-    userId: 'user123',
     elements: thumbnailElements,
     background: backgroundColor,
     imageSrc: "https://res.cloudinary.com/dmpn6t2jn/image/upload/v1659189652/" + imageSrc + ".png",
