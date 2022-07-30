@@ -35,10 +35,14 @@ function Editor ({ selectedThumbnail, setThumbnails, user }) {
   };
 
 
-  const handleExport = () => {
+  const handleExport = async () => {
     setSelectedId(null);
-    
-    const uri = stageRef.current.toDataURL();
+
+    const uri = stageRef.current.toDataURL({
+      mimeType: 'image/png',
+      quality: 0.5
+    });
+
     let link = document.createElement('a');
     link.download = 'stage.png';
     link.href = uri;

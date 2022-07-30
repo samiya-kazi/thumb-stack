@@ -29,6 +29,7 @@ function ShapeElement ({ shape, setShapes, isSelected, onSelect }) {
 
     const newImage = new window.Image();
     newImage.src = shape.imageSrc;
+    newImage.crossOrigin = 'Anonymous';
     newImage.addEventListener('load', () => setImage(newImage));
 
   }

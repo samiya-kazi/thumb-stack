@@ -25,8 +25,6 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user }) 
   }
 
 
-
-
   function handleUpload(event) {
 
     if (user) {
@@ -35,7 +33,6 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user }) 
 
       cldUpload(event, user)
         .then(data => {
-          console.log(data);
           setShapes(prevlist => {
             const newId = prevlist.length ? prevlist[prevlist.length - 1].key + 1 : 1;
 
@@ -52,7 +49,7 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user }) 
               y: 20,
               height,
               width,
-              rotation: 0,
+              rotate: 0,
               draggable: true, 
             }
 
