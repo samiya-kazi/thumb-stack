@@ -29,9 +29,10 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user }) 
 
     if (user) {
 
-      const [file_name, file_type] = event.target.files[0].name.split('.');
+      const file = event.target.files[0]
+      const file_type = file.name.split('.').at(-1);
 
-      cldUpload(event, user)
+      cldUpload(file, user._id)
         .then(data => {
           setShapes(prevlist => {
             const newId = prevlist.length ? prevlist[prevlist.length - 1].key + 1 : 1;

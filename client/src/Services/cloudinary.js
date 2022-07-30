@@ -1,12 +1,11 @@
 
 const BASE_URL = 'https://api.cloudinary.com/v1_1/dmpn6t2jn/image/upload'
 
-export function cldUpload (event, user) {
+export function cldUpload (file, userId) {
 
-  const file = event.target.files[0];
   const formData = new FormData();
-  const [file_name, file_type] = file.name.split('.');
-  const public_id = user._id + '_' + Date.now() + '_' + file_name;
+  const file_name = file.name.split('.')[0];
+  const public_id = userId + '_' + Date.now() + '_' + file_name;
   
   formData.append("file", file);
   formData.append("upload_preset", "rcqrwjbn");
