@@ -130,6 +130,10 @@ function Editor ({ selectedThumbnail, setSelectedThumbnail, setThumbnails, user 
             ('Created at: ' + format(parseISO(selectedThumbnail.createdAt), 'do LLL, yyyy K:mm aaaa')) 
             : null }
           </div>
+          <div>{selectedThumbnail ? 
+            ('Last modified: ' + format(parseISO(selectedThumbnail.lastModified), 'do LLL, yyyy K:mm aaaa')) 
+            : null }
+          </div>
         </div>
         <div className='drawing-stage'>
           <Stage width={640} height={350} onMouseDown={checkDeselect} onTouchStart={checkDeselect} ref={stageRef}>
