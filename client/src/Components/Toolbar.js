@@ -222,6 +222,7 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
           <option style={{fontFamily: "Calibri"}}>Calibri</option>
           <option style={{fontFamily: "Georgia"}}>Georgia</option>
           <option style={{fontFamily: "Courier New"}}>Courier New</option>
+          <option style={{fontFamily: "Comic Sans MS"}}>Comic Sans MS</option>
           <option style={{fontFamily: "Impact"}}>Impact</option>
           <option style={{fontFamily: "Brush Script MT"}}>Brush Script MT</option>
         </select>
