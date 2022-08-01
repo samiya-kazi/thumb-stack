@@ -16,6 +16,10 @@ const thumbnailSchema = new Schema({
     type: Date,
     default: Date.now()
   },
+  lastModified: {
+    type: Date,
+    default: Date.now()
+  },
   imageSrc: {
     type: String,
     required: true

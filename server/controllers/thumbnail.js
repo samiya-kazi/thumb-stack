@@ -26,6 +26,7 @@ async function updateThumbnail (req, res) {
   try {
     const id = req.query.tid;
     const newAttr = req.body;
+    newAttr.lastModified = Date.now();
     const thumbnail = await Thumbnail.findById(id);
     
     for(const [key, value] of Object.entries(newAttr)) {
