@@ -64,6 +64,7 @@
   box-shadow: 10px 5px 23px 7px rgba(0,0,0,0.67);
   border-radius: 10px;
   padding: 5px;
+  overflow-x: hidden;
 }
 
 .thumbnail-container > * {
@@ -338,6 +339,18 @@ ul > .logout:hover {
   align-self: center;
 }
 
+.thumbnail-section {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.thumbnail-section > * {
+  margin: 10px;
+}
+
 
 /* Safari */
 @-webkit-keyframes spin {
@@ -360,4 +373,24 @@ ul > .logout:hover {
   100% {
       background-position: 0% 50%;
   }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+ 
+
+::-webkit-scrollbar-thumb {
+  background: rgb(60, 2, 85); 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(60, 2, 85); 
 }

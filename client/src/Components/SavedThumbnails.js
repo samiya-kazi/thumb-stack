@@ -7,13 +7,15 @@ function SavedThumbnails ({ thumbnails, setSelectedThumbnail }) {
 
       <button key='new' onClick={() => {setSelectedThumbnail(null)}}>New</button>
 
-      {thumbnails && thumbnails.map((thumbnail, key) => {
-        return <img src={thumbnail.imageSrc} 
-          key={key} 
-          onClick={() => {setSelectedThumbnail(thumbnail)}} 
-          className='thumbnail-preview'
-        />
-      })}
+      <div className="thumbnail-section">
+        {thumbnails && thumbnails.map((thumbnail, key) => {
+          return <img src={thumbnail.imageSrc} 
+            key={key} 
+            onClick={() => {setSelectedThumbnail(thumbnail)}} 
+            className='thumbnail-preview'
+          />
+        })}
+      </div>
 
 
     </div>
