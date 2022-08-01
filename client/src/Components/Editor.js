@@ -133,12 +133,12 @@ function Editor ({ selectedThumbnail, setSelectedThumbnail, setThumbnails, user 
       <div className='editing-section'>
         <div className='info-loader'>
           <div className='thumbnail-info'>
-            <div>{selectedThumbnail ? 
-              ('Created at: ' + format(parseISO(selectedThumbnail.createdAt), 'do LLL, yyyy K:mm aaaa')) 
+            <div className='date-info'>{selectedThumbnail ? 
+              ('Created at: ' + format(parseISO(selectedThumbnail.createdAt), 'do LLL, yyyy K:mm aaaa') ) 
               : null }
             </div>
-            <div>{selectedThumbnail ? 
-              ('Last modified: ' + format(parseISO(selectedThumbnail.lastModified), 'do LLL, yyyy K:mm aaaa')) 
+            <div className='date-info'> {selectedThumbnail ? 
+              ('Last modified: ' + format(parseISO(selectedThumbnail.lastModified), 'do LLL, yyyy K:mm aaaa') ) 
               : null }
             </div>
           </div>

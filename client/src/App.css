@@ -267,6 +267,7 @@ ul > .logout:hover {
   margin-bottom: 20px;
   margin-right: 20px;
   margin-top: 5px;
+  font-size: small;
 }
 
 .thumbnail-info {
