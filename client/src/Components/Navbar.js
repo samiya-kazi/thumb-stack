@@ -2,6 +2,7 @@ import auth from '../utils/auth';
 import { Link } from "react-router-dom";
 import { logout } from "../Services/apiService";
 import { useNavigate } from 'react-router-dom';
+import logo from '../images/logo.png'
 
 function Navbar ({ isAuth, setIsAuth }) {
 
@@ -20,11 +21,12 @@ function Navbar ({ isAuth, setIsAuth }) {
 
   return (
     <div className="nav">
-      <div className="logo">
         <Link to="/">
-          <div className="logo">ThumbStack</div>
+        <div className="logo">
+          <img src={logo} className='logo-png' />
+          <div className="logo-name">ThumbStack</div>
+        </div>
         </Link>
-      </div>
       <nav>
         <ul>
           {isAuth ? 

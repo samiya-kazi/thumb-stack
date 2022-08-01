@@ -158,12 +158,17 @@ input[type="file"] {
   animation: gradient 30s ease infinite;
 }
 
-.logo {
+.nav > a {
   height: 100%;
-  padding: 1rem;
+}
+
+.nav > a > .logo {
+  margin: 0 0 0 1rem;
+  height: 100%;
   color: white;
   align-self: center;
   font-size: x-large;
+  display: flex;
 }
 
 .form-container {
@@ -322,6 +327,15 @@ ul > .logout:hover {
 .date-info {
   height: 1.5rem;
   font-size: 14px;
+}
+
+
+.logo-png {
+  height: 100%;
+}
+
+.logo-name {
+  align-self: center;
 }
 
 
