@@ -7,12 +7,14 @@ import { format, parseISO } from 'date-fns';
 import ShapeElement from './ShapeElement';
 import TextElement from './TextElement';
 import Toolbar from './Toolbar';
+import Loader from './Loader';
 
 function Editor ({ selectedThumbnail, setSelectedThumbnail, setThumbnails, user }) {
 
   const [shapes, setShapes] = useState(selectedThumbnail ? selectedThumbnail.elements : []);
   const [selectedId, setSelectedId] = useState(null);
   const [backgroundColor, setBackgroundColor] = useState(selectedThumbnail ? selectedThumbnail.background : '#ffffff');
+  const [isLoading, setIsLoading] = useState(false);
 
   const stageRef = useRef();
   const bgRef = useRef();
@@ -72,10 +74,13 @@ function Editor ({ selectedThumbnail, setSelectedThumbnail, setThumbnails, user 
       quality: 0.5
     });
 
+    setIsLoading(true);
+
     getFileFromUrl(uri).then((file) => {
       thumbnailUpload(file, user._id).then((data) => {
-        if (selectedThumbnail) {
 
+        setIsLoading(false);
+        if (selectedThumbnail) {
           updateThumbnail(selectedThumbnail._id, shapes, backgroundColor, data.public_id)
             .then((newThumbnail) => {
               setThumbnails(prevlist => {
@@ -123,18 +128,23 @@ function Editor ({ selectedThumbnail, setSelectedThumbnail, setThumbnails, user 
         setBackgroundColor={setBackgroundColor}
         handleDeleteElement={handleDeleteElement}
         user={user}
+        setIsLoading={setIsLoading}
         />
       <div className='editing-section'>
-        <div className='thumbnail-info'>
-          <div>{selectedThumbnail ? 
-            ('Created at: ' + format(parseISO(selectedThumbnail.createdAt), 'do LLL, yyyy K:mm aaaa')) 
-            : null }
+        <div className='info-loader'>
+          <div className='thumbnail-info'>
+            <div>{selectedThumbnail ? 
+              ('Created at: ' + format(parseISO(selectedThumbnail.createdAt), 'do LLL, yyyy K:mm aaaa')) 
+              : null }
+            </div>
+            <div>{selectedThumbnail ? 
+              ('Last modified: ' + format(parseISO(selectedThumbnail.lastModified), 'do LLL, yyyy K:mm aaaa')) 
+              : null }
+            </div>
           </div>
-          <div>{selectedThumbnail ? 
-            ('Last modified: ' + format(parseISO(selectedThumbnail.lastModified), 'do LLL, yyyy K:mm aaaa')) 
-            : null }
-          </div>
+          {isLoading && <Loader />}
         </div>
+
         <div className='drawing-stage'>
           <Stage width={640} height={350} onMouseDown={checkDeselect} onTouchStart={checkDeselect} ref={stageRef}>
             <Layer>

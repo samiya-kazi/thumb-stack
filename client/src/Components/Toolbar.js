@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { cldUpload } from "../Services/cloudinary";
 
-function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user }) {
+function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, setIsLoading }) {
 
   const [state, setState] = useState({fill: '#000000', opacity: '1', font: 'Calibri'});
 
@@ -28,12 +28,15 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user }) 
   function handleUpload(event) {
 
     if (user) {
+      setIsLoading(true);
 
       const file = event.target.files[0]
       const file_type = file.name.split('.').at(-1);
 
       cldUpload(file, user._id)
         .then(data => {
+          setIsLoading(false);
+
           setShapes(prevlist => {
             const newId = prevlist.length ? prevlist[prevlist.length - 1].key + 1 : 1;
 
