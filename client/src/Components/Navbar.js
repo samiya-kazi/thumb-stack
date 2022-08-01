@@ -33,7 +33,7 @@ function Navbar ({ isAuth, setIsAuth }) {
                 <li>Dashboard</li>
               </Link>
             
-              <div onClick={handleLogout}>
+              <div className="logout" onClick={handleLogout}>
                 <li className='nav-button'>Logout</li>
               </div>
           </>)
