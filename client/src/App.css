@@ -7,6 +7,9 @@
   background-color: white;
   align-items: center;
   margin: 10px;
+  box-shadow: 10px 5px 23px 7px rgba(0,0,0,0.67);
+  border-radius: 10px;
+  padding: 5px;
 }
 
 .drawing-stage {
@@ -58,6 +61,9 @@
   width: fit-content;
   overflow-y: auto;
   align-items: center;
+  box-shadow: 10px 5px 23px 7px rgba(0,0,0,0.67);
+  border-radius: 10px;
+  padding: 5px;
 }
 
 .thumbnail-container > * {
@@ -67,7 +73,7 @@
 button {
   padding: 0.5rem;
   background-color: white;
-  border: rgb(45, 173, 228) solid 2px;
+  border: rgb(101, 21, 151) solid 2px;
   border-radius: 10px;
   width: 80%;
   font-size: 14px;
@@ -75,7 +81,7 @@ button {
 }
 
 button:hover {
-  background-color: rgb(131, 206, 213);
+  background-color: rgb(217, 186, 241);
 }
 
 button:active {
@@ -97,7 +103,7 @@ button:active {
 .font-selector {
   width: 90%;
   padding: 5px;
-  border: rgb(45, 173, 228) solid 2px;
+  border: rgb(101, 21, 151) solid 2px;
   border-radius: 10px;
 }
 
@@ -109,7 +115,7 @@ input[type="file"] {
   padding: 0.5rem 0;
   text-align: center;
   background-color: white;
-  border: rgb(45, 173, 228) solid 2px;
+  border: rgb(101, 21, 151) solid 2px;
   border-radius: 10px;
   cursor: pointer;
   font-size: 14px;
@@ -118,7 +124,7 @@ input[type="file"] {
 
 
 .custom-file-upload:hover {
-  background-color: rgb(131, 206, 213);
+  background-color: rgb(217, 186, 241);
 }
 
 .custom-file-upload:active {
@@ -130,7 +136,7 @@ input[type="file"] {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  background-color: rgb(26, 104, 104);
+  background-color: rgb(60, 2, 85);
   height: 10vh;
 }
 
@@ -139,9 +145,11 @@ input[type="file"] {
   height: 90vh;
   display: flex;
   justify-content: center;
-  background-color: rgb(132, 197, 194);
+  background: linear-gradient(-45deg, #b4593d, #bf3268, #1a7b9e, #9360d1);
+  background-size: 400% 400%;
   min-width:fit-content;
   min-height: fit-content;
+  animation: gradient 30s ease infinite;
 }
 
 .logo {
@@ -159,6 +167,11 @@ input[type="file"] {
   flex-wrap: wrap;
   margin-left: auto;
   margin-right: auto;
+}
+
+.form-container > form {
+  box-shadow: 10px 5px 23px 7px rgba(0,0,0,0.67);
+  border-radius: 10px;
 }
 
 .form-container > form > div > input {
@@ -227,7 +240,7 @@ li {
 }
 
 ul > a:hover {
-  background-color: rgb(13, 52, 52);
+  background-color: rgb(39, 13, 52);;
 }
 
 .logout {
@@ -238,7 +251,7 @@ ul > a:hover {
 }
 
 ul > .logout:hover {
-  background-color: rgb(13, 52, 52);
+  background-color: rgb(39, 13, 52);
 }
 
 .thumbnail-preview {
@@ -310,3 +323,14 @@ ul > .logout:hover {
   100% { transform: rotate(360deg); }
 }
 
+@keyframes gradient {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+}
