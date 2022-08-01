@@ -31,6 +31,9 @@ const thumbnailElementSchema = new Schema({
   radius: Number,
   fontFamily: String,
   fill: String,
+  stroke: String,
+  strokeWidth: Number,
+  opacity: Number,
   draggable: Boolean,
   imageSrc: String
 });
