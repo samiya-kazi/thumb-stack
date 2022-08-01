@@ -3,7 +3,15 @@ import { cldUpload } from "../Services/cloudinary";
 
 function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, setIsLoading }) {
 
-  const [state, setState] = useState({fill: '#000000', opacity: '1', font: 'Calibri'});
+  const initial_state = {
+    fill: '#000000', 
+    stroke: '#000000', 
+    opacity: 1,
+    font: 'Calibri',
+    noStroke: false
+  }
+
+  const [state, setState] = useState(initial_state);
 
   function handleChange (event) {
     const { name, value } = event.target;
@@ -15,6 +23,12 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
 
   function handleBackgroundChange (event) {
     setBackgroundColor(event.target.value)
+  }
+
+  function handleToggle () {
+    setState(prevState => {
+      return {...prevState, noStroke: !state.noStroke}
+    })
   }
   
 
@@ -79,7 +93,7 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
         height: 50, 
         fill: state.fill,
         stroke: state.stroke,
-        opacity: state.opacity,
+        opacity: parseFloat(state.opacity),
         strokeWidth: (state.noStroke ? 0 : 4),
         draggable: true
       }
@@ -105,7 +119,7 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
         radius: 25, 
         fill: state.fill,
         stroke: state.stroke,
-        opacity: state.opacity,
+        opacity: parseFloat(state.opacity),
         strokeWidth: (state.noStroke ? 0 : 4),
         draggable: true, 
       }
@@ -133,7 +147,7 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
         outerRadius: 40,
         fill: state.fill,
         stroke: state.stroke,
-        opacity: state.opacity,
+        opacity: parseFloat(state.opacity),
         strokeWidth: (state.noStroke ? 0 : 4),
         draggable: true, 
       }
@@ -161,7 +175,7 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
         fontFamily: state.font,
         fill: state.fill,
         stroke: state.stroke,
-        opacity: state.opacity,
+        opacity: parseFloat(state.opacity),
         strokeWidth: (state.noStroke ? 0 : 2),
         draggable: true, 
       }
@@ -183,17 +197,18 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
 
       <div className="color-input">
         <label>Fill:</label>
-        <input className='color-picker' type='color' onChange={handleChange} name='fill' />
+        <input className='color-picker' type='color' onChange={handleChange} name='fill' defaultValue="#000000" />
       </div>
 
       <div className="color-input">
         <label>Stroke:</label>
-        <input className='color-picker' type='color' onChange={handleChange} name='stroke' defaultValue="#ffffff" />
+        <input className='color-picker' type='color' onChange={handleChange} name='stroke' defaultValue="#000000" />
       </div>
 
       <div className="color-input">
-        <input type="checkbox" name="noStroke" value="noStroke" onChange={handleChange} />
-        <label> No stroke</label><br></br>
+        <input type="checkbox" name="noStroke" value="noStroke" checked={state.noStroke} 
+          onChange={handleToggle} />
+        <label>No stroke</label>
       </div>
 
       <div className="full-input">

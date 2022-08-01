@@ -311,7 +311,7 @@ ul > .logout:hover {
 .loader {
   border: 8px solid #f3f3f3;
   border-radius: 50%;
-  border-top: 8px solid rgb(108, 167, 164);
+  border-top: 8px solid rgb(60, 2, 85);
   width: 30px;
   height: 30px;
   -webkit-animation: spin 1.5s linear infinite; /* Safari */
@@ -321,6 +321,7 @@ ul > .logout:hover {
 
 .date-info {
   height: 1.5rem;
+  font-size: 14px;
 }
 
 
