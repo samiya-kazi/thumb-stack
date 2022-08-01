@@ -33,7 +33,7 @@ function Register ({ setIsAuth }) {
       register(state)
       .then(res => {
         if(!res) {
-          setErrorMessage('Incorrect login information.')
+          setErrorMessage('An account for this e-mail already exists.')
         } else {
           // This sets isAuthenticated = true and redirects to profile
           console.log(res);
@@ -50,7 +50,7 @@ function Register ({ setIsAuth }) {
     if(state.password !== state.confirmPassword) {
       setErrorMessage('Passwords do not match.');
       return false;
-    } 
+    }
 
     return true;
   };
@@ -82,7 +82,7 @@ function Register ({ setIsAuth }) {
           <input type='password' name="confirmPassword" onChange={handleChange} required={true} />
         </div>
         <button type="submit">Register</button>
-        <div>{errorMessage}</div>
+        <div className='error-message'>{errorMessage}</div>
       </form>
     </div>
   )

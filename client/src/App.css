@@ -215,3 +215,10 @@ li:hover {
   width: 80%;
 }
 
+
+.error-message {
+  color: maroon;
+  align-self: center;
+  margin-top: 10px;
+}
+

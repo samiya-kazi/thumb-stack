@@ -61,7 +61,7 @@ function Login ({ setIsAuth }) {
           <input type='Password' onChange={handleChange}name='password'/>
         </div>
         <button type="submit">Login</button>
-        <div>{errorMessage}</div>
+        <div className='error-message'>{errorMessage}</div>
       </form>
     </div>
   )
