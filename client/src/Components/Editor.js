@@ -3,6 +3,7 @@ import { Stage, Layer, Rect } from 'react-konva';
 import { deleteThumbnail, saveThumbnail, updateThumbnail } from '../Services/apiService';
 import { thumbnailUpload } from '../Services/cloudinary';
 import { getFileFromUrl } from '../utils/fileConvert';
+import { format, parseISO } from 'date-fns';
 import ShapeElement from './ShapeElement';
 import TextElement from './TextElement';
 import Toolbar from './Toolbar';
@@ -123,7 +124,13 @@ function Editor ({ selectedThumbnail, setSelectedThumbnail, setThumbnails, user 
         handleDeleteElement={handleDeleteElement}
         user={user}
         />
-      <div>
+      <div className='editing-section'>
+        <div className='thumbnail-info'>
+          <div>{selectedThumbnail ? 
+            ('Created at: ' + format(parseISO(selectedThumbnail.createdAt), 'do LLL, yyyy K:mm aaaa')) 
+            : null }
+          </div>
+        </div>
         <div className='drawing-stage'>
           <Stage width={640} height={350} onMouseDown={checkDeselect} onTouchStart={checkDeselect} ref={stageRef}>
             <Layer>
@@ -163,12 +170,12 @@ function Editor ({ selectedThumbnail, setSelectedThumbnail, setThumbnails, user 
             </Layer>
           </Stage>
         </div>
-        <div>
-          640 x 350
+        <div className='resolution'>
+          Resolution: 640 x 350
         </div>
         <div className='button-container'>
           <button onClick={handleExport}>Download Image</button>
-          <button onClick={handlePost}>{selectedThumbnail ? 'Update' : 'Save' }</button>
+          <button onClick={handlePost}>{selectedThumbnail ? 'Update Thumbnail' : 'Save Thumbnail' }</button>
           <button onClick={handleThumbnailDelete} className='delete-button'>Delete Thumbnail</button>
         </div>
       </div>

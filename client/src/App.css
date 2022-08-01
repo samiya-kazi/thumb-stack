@@ -2,6 +2,7 @@
 .editor {
   min-width:fit-content;
   min-height: fit-content;
+  height: 95%;
   display: flex;
   background-color: white;
   align-items: center;
@@ -12,12 +13,12 @@
   width: fit-content;
   height: fit-content;
   border: black solid 1px;
-  margin: 20px;
+  margin: 20px 20px 0 20px;
 }
 
 .toolbar {
   width: 150px;
-  height: 90%;
+  min-height: fit-content;
   border: rgb(175, 175, 175) solid 1px;
   border-radius: 10px;
   margin: 0.5rem;
@@ -56,6 +57,7 @@
   margin: 10px;
   width: fit-content;
   overflow-y: auto;
+  align-items: center;
 }
 
 .thumbnail-container > * {
@@ -68,7 +70,12 @@ button {
   border: rgb(45, 173, 228) solid 2px;
   border-radius: 10px;
   width: 80%;
+  font-size: 14px;
   cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(131, 206, 213);
 }
 
 button:active {
@@ -99,11 +106,19 @@ input[type="file"] {
 }
 
 .custom-file-upload {
-  padding: 0.5rem;
+  padding: 0.5rem 0;
+  text-align: center;
   background-color: white;
   border: rgb(45, 173, 228) solid 2px;
   border-radius: 10px;
   cursor: pointer;
+  font-size: 14px;
+  width: 80%;
+}
+
+
+.custom-file-upload:hover {
+  background-color: rgb(131, 206, 213);
 }
 
 .custom-file-upload:active {
@@ -231,6 +246,7 @@ ul > .logout:hover {
   border:rgb(13, 52, 52) solid 1px;
   height: 100px;
   width: 80%;
+  cursor: pointer;
 }
 
 
@@ -238,5 +254,22 @@ ul > .logout:hover {
   color: maroon;
   align-self: center;
   margin-top: 10px;
+}
+
+.editing-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.resolution {
+  align-self: flex-end;
+  color: rgb(111, 111, 111);
+  margin-bottom: 20px;
+  margin-right: 20px;
+  margin-top: 5px;
+}
+
+.thumbnail-info {
+  margin-left: 20px;
 }
 
