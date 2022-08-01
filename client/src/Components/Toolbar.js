@@ -18,13 +18,6 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
   }
   
 
-
-  function getRGBA () {
-    const rgbaCol = 'rgba(' + parseInt(state.fill.slice(-6, -4), 16) + ',' + parseInt(state.fill.slice(-4, -2), 16) + ',' + parseInt(state.fill.slice(-2), 16) + ',' + state.opacity + ')';
-    return rgbaCol;
-  }
-
-
   function handleUpload(event) {
 
     if (user) {
@@ -84,7 +77,10 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
         y: 20,
         width: 50, 
         height: 50, 
-        fill: getRGBA(),
+        fill: state.fill,
+        stroke: state.stroke,
+        opacity: state.opacity,
+        strokeWidth: (state.noStroke ? 0 : 4),
         draggable: true
       }
 
@@ -107,7 +103,10 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
         x: 20,
         y: 20,
         radius: 25, 
-        fill: getRGBA(),
+        fill: state.fill,
+        stroke: state.stroke,
+        opacity: state.opacity,
+        strokeWidth: (state.noStroke ? 0 : 4),
         draggable: true, 
       }
 
@@ -132,7 +131,10 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
         numPoints: 5, 
         innerRadius: 20,
         outerRadius: 40,
-        fill: getRGBA(),
+        fill: state.fill,
+        stroke: state.stroke,
+        opacity: state.opacity,
+        strokeWidth: (state.noStroke ? 0 : 4),
         draggable: true, 
       }
 
@@ -157,7 +159,10 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
         text: 'Add text',
         fontSize: 30,
         fontFamily: state.font,
-        fill: getRGBA(),
+        fill: state.fill,
+        stroke: state.stroke,
+        opacity: state.opacity,
+        strokeWidth: (state.noStroke ? 0 : 2),
         draggable: true, 
       }
 
@@ -171,18 +176,28 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
   return (
     <div className="toolbar">
       <h3>Toolbar</h3>
-      <div>
+      <div className="color-input">
         <label>BG:</label>
         <input className='color-picker' type='color' onChange={handleBackgroundChange} defaultValue="#ffffff"/>
       </div>
 
-      <div>
+      <div className="color-input">
         <label>Fill:</label>
         <input className='color-picker' type='color' onChange={handleChange} name='fill' />
       </div>
 
+      <div className="color-input">
+        <label>Stroke:</label>
+        <input className='color-picker' type='color' onChange={handleChange} name='stroke' defaultValue="#ffffff" />
+      </div>
+
+      <div className="color-input">
+        <input type="checkbox" name="noStroke" value="noStroke" onChange={handleChange} />
+        <label> No stroke</label><br></br>
+      </div>
+
       <div className="full-input">
-        <label>Fill Opacity:</label>
+        <label>Opacity:</label>
         <input type="range" min="0" max="1" step="0.1" onChange={handleChange} className="opacity-range" name='opacity' />
       </div>
 
