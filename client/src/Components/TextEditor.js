@@ -1,4 +1,4 @@
-function TextEditor ({ shapeRef, stage, handleSubmit }) {
+function TextEditor ({ shapeRef, stage, handleSubmit, showText }) {
 
   const textPosition = shapeRef.current.absolutePosition();
 
@@ -41,15 +41,18 @@ function TextEditor ({ shapeRef, stage, handleSubmit }) {
 
   textarea.addEventListener('keydown', function (e) {
     // hide on enter
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 && !e.shiftKey) {
       handleSubmit(textarea.value);
-      textarea.remove();
+      textarea.parentNode.removeChild(textarea);
+      window.removeEventListener('click', handleOutsideClick);
     }
   });
 
   function handleOutsideClick(e) {
     if (e.target !== textarea) {
-      textarea.remove();
+      showText();
+      textarea.parentNode.removeChild(textarea);
+      window.removeEventListener('click', handleOutsideClick);
     }
   }
 
