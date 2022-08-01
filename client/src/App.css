@@ -318,6 +318,12 @@ ul > .logout:hover {
   animation: spin 1.5s linear infinite;
 }
 
+
+.date-info {
+  height: 1.5rem;
+}
+
+
 /* Safari */
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
