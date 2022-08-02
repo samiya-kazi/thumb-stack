@@ -13,6 +13,7 @@ function SavedThumbnails ({ thumbnails, setSelectedThumbnail }) {
             key={key} 
             onClick={() => {setSelectedThumbnail(thumbnail)}} 
             className='thumbnail-preview'
+            alt={'thumbnail id: ' + thumbnail._id}
           />
         })}
       </div>

@@ -35,8 +35,6 @@ function Register ({ setIsAuth }) {
         if(!res) {
           setErrorMessage('An account for this e-mail already exists.')
         } else {
-          // This sets isAuthenticated = true and redirects to profile
-          console.log(res);
           setIsAuth(true);
           auth.login(() => navigate('/dashboard'));
         }
@@ -62,26 +60,26 @@ function Register ({ setIsAuth }) {
       <form onSubmit={handleSubmit}>
         <h1>Register</h1>
         <div>
-          <label>First Name:</label>
-          <input type='text' name="firstName" onChange={handleChange} required={true} />
+          <label htmlFor='firstName'>First Name:</label>
+          <input id='firstName' type='text' name="firstName" onChange={handleChange} required={true} />
         </div>
         <div>
-          <label>Last Name:</label>
-          <input type='text' name="lastName" onChange={handleChange} required={true} />
+          <label htmlFor='lastName'>Last Name:</label>
+          <input id='lastName' type='text' name="lastName" onChange={handleChange} required={true} />
         </div>
         <div>
-          <label>E-mail:</label>
-          <input type='email' name="email" onChange={handleChange} required={true} />
+          <label htmlFor='email'>E-mail:</label>
+          <input id='email' type='email' name="email" onChange={handleChange} required={true} />
         </div>
         <div>
-          <label>Password:</label>
-          <input type='password' name="password" onChange={handleChange} required={true} />
+          <label htmlFor='password'>Password:</label>
+          <input id='password' type='password' name="password" onChange={handleChange} required={true} />
         </div>
         <div>
-          <label>Confirm Password:</label>
-          <input type='password' name="confirmPassword" onChange={handleChange} required={true} />
+          <label htmlFor='confirmPassword'>Confirm Password:</label>
+          <input id='confirmPassword' type='password' name="confirmPassword" onChange={handleChange} required={true} />
         </div>
-        <button type="submit">Register</button>
+        <button className='form-button'>Register</button>
         <div className='error-message'>{errorMessage}</div>
       </form>
     </div>

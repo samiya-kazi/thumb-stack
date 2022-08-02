@@ -11,10 +11,14 @@ function ShapeElement ({ shape, setShapes, isSelected, onSelect }) {
 
   useEffect(() => {
     if (shape.type === 'image') {
-      loadImage();
+      const newImage = new window.Image();
+      newImage.src = shape.imageSrc;
+      newImage.crossOrigin = 'Anonymous';
+      setImage(newImage);
     }
   }, [shape]);
 
+  
 
   useEffect(() => {
     if (isSelected) {
@@ -24,15 +28,6 @@ function ShapeElement ({ shape, setShapes, isSelected, onSelect }) {
     }
   }, [isSelected]);
 
-
-  function loadImage () {
-
-    const newImage = new window.Image();
-    newImage.src = shape.imageSrc;
-    newImage.crossOrigin = 'Anonymous';
-
-    newImage.addEventListener('load', () => {setImage(newImage)});
-  }
 
 
   function handleDragEnd (event) {

@@ -60,7 +60,7 @@ function Login ({ setIsAuth }) {
           <label>Password:</label>
           <input type='Password' onChange={handleChange}name='password'/>
         </div>
-        <button type="submit">Login</button>
+        <button className='form-button'>Login</button>
         <div className='error-message'>{errorMessage}</div>
       </form>
     </div>

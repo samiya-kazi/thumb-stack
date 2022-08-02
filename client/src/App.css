@@ -187,13 +187,7 @@ input[type="file"] {
   border-radius: 10px;
 }
 
-.form-container > form > div > input {
-  margin: 0.2rem 0;
-  padding: 0.2rem 0.5rem;
-  font-size: 1rem;
-}
-
-.form-container > form > div > label {
+.form-container > form > div > input, label {
   margin: 0.2rem 0;
   padding: 0.2rem 0.5rem;
   font-size: 1rem;
@@ -450,6 +444,19 @@ ul > .logout:hover {
   opacity: 1;
   right: 0;
   background-color: rgb(60, 2, 85);
+}
+
+.form-button {
+  margin-top: 1rem;
+  font-size: large;
+  background-color: rgb(60, 2, 85);
+  color: white;
+  border: none;
+  padding: 0.75rem 0;
+}
+
+.form-button:hover {
+  color: black;
 }
 
 
