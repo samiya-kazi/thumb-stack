@@ -157,6 +157,7 @@ input[type="file"] {
   min-width:fit-content;
   min-height: fit-content;
   animation: gradient 30s ease infinite;
+  overflow-x: hidden;
 }
 
 .nav > a {
@@ -356,11 +357,94 @@ ul > .logout:hover {
   height: 100%;
   width: 100%;
   color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-shadow: 2px 4px 8px #000000;
 }
 
 .hero-info-container {
   display: flex;
+  justify-content: space-around;
+  margin: 20px 30px;
 }
+
+.hero-info {
+  margin: 40px 80px 0 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.previews {
+  display: grid;
+  grid-template-columns: min-content min-content;
+}
+
+.portfolio-img {
+  width: 400px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 10px 5px 23px 7px rgba(0,0,0,0.67);
+}
+
+.home-buttons-container {
+  align-self: center;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin: 20px;
+}
+
+.home-buttons-container > a {
+  width: 100px;
+  height: fit-content;
+
+}
+
+.home-button {
+  background-color: rgb(60, 2, 85);
+  color: white;
+  padding: 20px;
+  border: none;
+  border-radius: 25px;
+  width: fit-content;
+  font-size: large;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.home-button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.home-button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.home-button:hover {
+  background-color: rgb(60, 2, 85);
+}
+
+.home-button:hover span {
+  padding-right: 25px;
+  background-color: rgb(60, 2, 85);
+}
+
+.home-button:hover span:after {
+  opacity: 1;
+  right: 0;
+  background-color: rgb(60, 2, 85);
+}
+
 
 
 /* Safari */
