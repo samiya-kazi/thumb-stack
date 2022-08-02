@@ -1,5 +1,4 @@
-
-const BASE_URL = 'https://api.cloudinary.com/v1_1/dmpn6t2jn/image/upload'
+import 'dotenv/config'
 
 export function cldUpload (file, userId) {
 
@@ -11,7 +10,7 @@ export function cldUpload (file, userId) {
   formData.append("upload_preset", "rcqrwjbn");
   formData.append("public_id", public_id);
   
-  return fetch(BASE_URL, {
+  return fetch(process.env.CLOUD_BASE_URL, {
     method: "POST",
     body: formData
   })
@@ -29,7 +28,7 @@ export function thumbnailUpload (file, userId) {
   formData.append("upload_preset", "qhk6boar");
   formData.append("public_id", public_id);
   
-  return fetch(BASE_URL, {
+  return fetch(process.env.CLOUD_BASE_URL, {
     method: "POST",
     body: formData
   })
