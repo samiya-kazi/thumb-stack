@@ -13,7 +13,7 @@ function ShapeElement ({ shape, setShapes, isSelected, onSelect }) {
     if (shape.type === 'image') {
       loadImage();
     }
-  }, []);
+  }, [shape]);
 
 
   useEffect(() => {
@@ -30,8 +30,8 @@ function ShapeElement ({ shape, setShapes, isSelected, onSelect }) {
     const newImage = new window.Image();
     newImage.src = shape.imageSrc;
     newImage.crossOrigin = 'Anonymous';
-    newImage.addEventListener('load', () => setImage(newImage));
 
+    newImage.addEventListener('load', () => {setImage(newImage)});
   }
 
 
