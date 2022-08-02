@@ -386,6 +386,13 @@ ul > .logout:hover {
   margin: 10px;
   border-radius: 10px;
   box-shadow: 10px 5px 23px 7px rgba(0,0,0,0.67);
+  transition: transform .2s;
+}
+
+.portfolio-img:hover {
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  transform: scale(1.1); 
 }
 
 .home-buttons-container {
