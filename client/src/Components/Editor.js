@@ -48,7 +48,7 @@ function Editor ({ selectedThumbnail, setSelectedThumbnail, setThumbnails, user 
       quality: 0.5
     });
 
-    let link = document.createElement('a');
+    const link = document.createElement('a');
     link.download = 'stage.png';
     link.href = uri;
     document.body.appendChild(link);

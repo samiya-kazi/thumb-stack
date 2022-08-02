@@ -5,7 +5,7 @@ import Editor from './Editor';
 import SavedThumbnails from './SavedThumbnails';
 
 function Dashboard ({ isAuth }) {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [thumbnails, setThumbnails] = useState([]);
   const [selectedThumbnail, setSelectedThumbnail] = useState(null);
@@ -16,10 +16,9 @@ function Dashboard ({ isAuth }) {
       getUserInfo()
         .then(user => {
           setUser(user);
-          getThumbnails(user._id)
-            .then(data => setThumbnails(data))
-            .catch(err => console.log(err));
+          return getThumbnails(user._id)
         })
+        .then(data => setThumbnails(data))
         .catch(err => console.log(err));
     } else {
       navigate('/');
