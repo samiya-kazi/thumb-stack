@@ -16,9 +16,21 @@ function Home ({ isAuth }) {
   }, [isAuth]);
 
   return (
-    <>
-      <h1>{`Hello, ${user ? user.firstName : 'New'} ${user ? user.lastName : 'User'}`} </h1>
-    </>
+    <div className='hero-container'>
+      <h1>{user ? 'Welcome back, ' + user.firstName + ' ' + user.lastName + '!'
+        : 'Get started with ThumbStack!'}</h1>
+
+      <div className='hero-info-container'>
+        <div className='hero-info'>
+
+        </div>
+
+        <div className='previews'>
+
+        </div>
+
+      </div>
+    </div>
   )
 }
 

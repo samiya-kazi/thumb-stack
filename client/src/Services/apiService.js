@@ -1,11 +1,10 @@
-import 'dotenv/config'
 
 export function saveThumbnail (thumbnailElements, backgroundColor, userId, imageSrc) {
   const body = {
     userId,
     elements: thumbnailElements,
     background: backgroundColor,
-    imageSrc: process.env.IMAGE_HOST_BASE_URL + imageSrc + ".png",
+    imageSrc: process.env.REACT_APP_IMAGE_HOST_BASE_URL + imageSrc + ".png",
   }
 
   const options = {
@@ -16,14 +15,14 @@ export function saveThumbnail (thumbnailElements, backgroundColor, userId, image
     }
   }
 
-  return fetch(`${process.env.SERVER_BASE_URL}/thumbnail`, options)
+  return fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/thumbnail`, options)
     .then(response => response.json())
     .catch(err => console.log(err));
 }
 
 
 export function getThumbnails (userId) {
-  return fetch(`${process.env.SERVER_BASE_URL}/thumbnail/${userId}`)
+  return fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/thumbnail/${userId}`)
     .then(response => response.json())
     .catch(err => console.log(err));
 }
@@ -33,7 +32,7 @@ export function updateThumbnail (id, thumbnailElements, backgroundColor, imageSr
   const body = {
     elements: thumbnailElements,
     background: backgroundColor,
-    imageSrc: process.env.IMAGE_HOST_BASE_URL + imageSrc + ".png",
+    imageSrc: process.env.REACT_APP_IMAGE_HOST_BASE_URL + imageSrc + ".png",
   }
 
   const options = {
@@ -44,7 +43,7 @@ export function updateThumbnail (id, thumbnailElements, backgroundColor, imageSr
     }
   }
 
-  return fetch(`${process.env.SERVER_BASE_URL}/thumbnail?tid=${id}`, options)
+  return fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/thumbnail?tid=${id}`, options)
     .then(response => response.json())
     .catch(err => console.log(err));
 }
@@ -57,7 +56,7 @@ export function deleteThumbnail (id) {
     method: 'DELETE',
   }
 
-  return fetch(`${process.env.SERVER_BASE_URL}/thumbnail?tid=${id}`, options)
+  return fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/thumbnail?tid=${id}`, options)
     .then(response => response.json())
     .catch(err => console.log(err));
 }
@@ -67,7 +66,7 @@ export function deleteThumbnail (id) {
 
 
 export function getUserInfo () {
-  return fetch(`${process.env.SERVER_BASE_URL}/user`,{
+  return fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/user`,{
      method: 'GET',
      credentials: 'include'
    })
@@ -77,7 +76,7 @@ export function getUserInfo () {
 
 
 export function logout () {
-  return fetch(`${process.env.SERVER_BASE_URL}/logout`, {
+  return fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/logout`, {
      method: 'GET',
      credentials: 'include'
    })
@@ -96,7 +95,9 @@ export function login (user) {
    credentials: 'include'
  };
 
-  return fetch(`${process.env.SERVER_BASE_URL}/login`, options)
+
+
+  return fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/login`, options)
     .then(response => {
       if(response.ok)
         return response.json()
@@ -122,7 +123,7 @@ export function register (registerInfo) {
     credentials: 'include'
 	};
 
-  return fetch(`${process.env.SERVER_BASE_URL}/register`, options)
+  return fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/register`, options)
     .then(response => {
       if(response.ok)
         return response.json();

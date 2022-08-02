@@ -1,4 +1,3 @@
-import 'dotenv/config'
 
 export function cldUpload (file, userId) {
 
@@ -10,7 +9,7 @@ export function cldUpload (file, userId) {
   formData.append("upload_preset", "rcqrwjbn");
   formData.append("public_id", public_id);
   
-  return fetch(process.env.CLOUD_BASE_URL, {
+  return fetch(process.env.REACT_APP_CLOUD_BASE_URL, {
     method: "POST",
     body: formData
   })
@@ -28,7 +27,7 @@ export function thumbnailUpload (file, userId) {
   formData.append("upload_preset", "qhk6boar");
   formData.append("public_id", public_id);
   
-  return fetch(process.env.CLOUD_BASE_URL, {
+  return fetch(process.env.REACT_APP_CLOUD_BASE_URL, {
     method: "POST",
     body: formData
   })
