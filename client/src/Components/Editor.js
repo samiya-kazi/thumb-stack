@@ -88,7 +88,7 @@ function Editor ({ selectedThumbnail, setSelectedThumbnail, setThumbnails, user 
             .then((newThumbnail) => {
               setThumbnails(prevlist => {
                 const newlist = prevlist.map(tn => {
-                  if(tn._id === newThumbnail._id) {
+                  if (tn._id === newThumbnail._id) {
                     tn = {...newThumbnail}
                   }
                   return tn
