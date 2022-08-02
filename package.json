@@ -19,5 +19,8 @@
   "homepage": "https://github.com/samiya-kazi/thumb-stack#readme",
   "devDependencies": {
     "eslint": "^8.20.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1"
   }
 }

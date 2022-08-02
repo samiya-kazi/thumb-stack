@@ -4,7 +4,8 @@ const cors = require('cors');
 const router = require('./router');
 const mongoose = require('mongoose');
 const session = require('express-session');
-const PORT = process.env.PORT || 3001;
+require('dotenv').config();
+const PORT = parseInt(process.env.PORT) || 3001;
 const maxAge = parseInt(process.env.MAX_AGE) || 3600000;
 const secret = process.env.SESSION_SECRET || 'secret123';
 
