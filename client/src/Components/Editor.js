@@ -69,6 +69,8 @@ function Editor ({ selectedThumbnail, setSelectedThumbnail, setThumbnails, user 
 
   function handlePost () {
 
+    setSelectedId(null);
+
     const uri = stageRef.current.toDataURL({
       mimeType: 'image/png',
       quality: 0.5
