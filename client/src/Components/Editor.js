@@ -95,15 +95,22 @@ function Editor ({ selectedThumbnail, setSelectedThumbnail, setThumbnails, user 
                 });
                 return newlist;
               })
-            });
+
+              setSelectedThumbnail(newThumbnail);
+            })
+            .catch(err => console.log(err));
         } else {
           saveThumbnail(shapes, backgroundColor, user._id, data.public_id, data.version)
             .then((newThumbnail) => {
-              setThumbnails(prevlist => [...prevlist, newThumbnail])
-            });
+              setThumbnails(prevlist => [...prevlist, newThumbnail]);
+              setSelectedThumbnail(newThumbnail);
+            })
+            .catch(err => console.log(err));
         }
       })
+      .catch(err => console.log(err));
     })
+    .catch(err => console.log(err));
   } 
 
 

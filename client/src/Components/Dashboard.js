@@ -23,7 +23,7 @@ function Dashboard ({ isAuth }) {
     } else {
       navigate('/');
     }
-  }, [isAuth]);
+  }, [isAuth, navigate]);
 
 
   return (

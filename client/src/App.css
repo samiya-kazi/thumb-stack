@@ -187,7 +187,13 @@ input[type="file"] {
   border-radius: 10px;
 }
 
-.form-container > form > div > input, label {
+.form-container > form > div > input {
+  margin: 0.2rem 0;
+  padding: 0.2rem 0.5rem;
+  font-size: 1rem;
+}
+
+.form-container > form > div > label {
   margin: 0.2rem 0;
   padding: 0.2rem 0.5rem;
   font-size: 1rem;
