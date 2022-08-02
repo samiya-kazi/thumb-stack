@@ -121,6 +121,18 @@ function Editor ({ selectedThumbnail, setSelectedThumbnail, setThumbnails, user 
   }
 
 
+  function handleOutsideClick (e) {
+    if (selectedId && e.target.tagName !== 'CANVAS') {
+      setSelectedId(null);
+    }
+  }
+
+
+  setTimeout(() => {
+    window.addEventListener('click', handleOutsideClick);
+  });
+
+
   return (
     <>
     <div className='editor'>
@@ -147,7 +159,7 @@ function Editor ({ selectedThumbnail, setSelectedThumbnail, setThumbnails, user 
         </div>
 
         <div className='drawing-stage'>
-          <Stage width={640} height={350} onMouseDown={checkDeselect} onTouchStart={checkDeselect} ref={stageRef}>
+          <Stage width={640} height={350} onMouseDown={checkDeselect} onTouchStart={checkDeselect} ref={stageRef} >
             <Layer>
               <Rect 
                 id='background'
