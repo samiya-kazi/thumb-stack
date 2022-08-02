@@ -1,10 +1,10 @@
 
-export function saveThumbnail (thumbnailElements, backgroundColor, userId, imageSrc) {
+export function saveThumbnail (thumbnailElements, backgroundColor, userId, imageSrc, version) {
   const body = {
     userId,
     elements: thumbnailElements,
     background: backgroundColor,
-    imageSrc: process.env.REACT_APP_IMAGE_HOST_BASE_URL + imageSrc + ".png",
+    imageSrc: process.env.REACT_APP_CLOUD_IMAGE_BASE_URL + '/v' + version + '/' + imageSrc + ".png",
   }
 
   const options = {
@@ -28,11 +28,11 @@ export function getThumbnails (userId) {
 }
 
 
-export function updateThumbnail (id, thumbnailElements, backgroundColor, imageSrc) {
+export function updateThumbnail (id, thumbnailElements, backgroundColor, imageSrc, version) {
   const body = {
     elements: thumbnailElements,
     background: backgroundColor,
-    imageSrc: process.env.REACT_APP_IMAGE_HOST_BASE_URL + imageSrc + ".png",
+    imageSrc: process.env.REACT_APP_CLOUD_IMAGE_BASE_URL + '/v' + version + '/' + imageSrc + ".png",
   }
 
   const options = {

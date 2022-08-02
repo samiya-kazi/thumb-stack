@@ -55,7 +55,7 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
               type: 'image',
               id:  JSON.stringify(newId),
               key: newId,
-              imageSrc: 'https://res.cloudinary.com/dmpn6t2jn/image/upload/v1659173872/' + data.public_id + '.' + file_type,
+              imageSrc: process.env.REACT_APP_CLOUD_IMAGE_BASE_URL + '/v' + data.version + '/' + data.public_id + '.' + file_type,
               x: 20,
               y: 20,
               height,
@@ -233,7 +233,7 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
       <button onClick={addStar}>Star</button>
       <button onClick={addText}>Text</button>
       <label className="custom-file-upload">
-        <input type="file" id="file_input" onChange={handleUpload}></input>
+        <input type="file" id="file_input" accept="image/png, image/jpeg" onChange={handleUpload}></input>
         Upload Image
       </label>
       <button onClick={handleDeleteElement}>Delete</button>

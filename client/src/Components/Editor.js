@@ -80,8 +80,9 @@ function Editor ({ selectedThumbnail, setSelectedThumbnail, setThumbnails, user 
       thumbnailUpload(file, user._id).then((data) => {
 
         setIsLoading(false);
+
         if (selectedThumbnail) {
-          updateThumbnail(selectedThumbnail._id, shapes, backgroundColor, data.public_id)
+          updateThumbnail(selectedThumbnail._id, shapes, backgroundColor, data.public_id, data.version)
             .then((newThumbnail) => {
               setThumbnails(prevlist => {
                 const newlist = prevlist.map(tn => {
@@ -94,7 +95,7 @@ function Editor ({ selectedThumbnail, setSelectedThumbnail, setThumbnails, user 
               })
             });
         } else {
-          saveThumbnail(shapes, backgroundColor, user._id, data.public_id)
+          saveThumbnail(shapes, backgroundColor, user._id, data.public_id, data.version)
             .then((newThumbnail) => {
               setThumbnails(prevlist => [...prevlist, newThumbnail])
             });
