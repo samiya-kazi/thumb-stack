@@ -137,8 +137,16 @@ function Editor ({ selectedThumbnail, setSelectedThumbnail, setThumbnails, user 
   }
 
 
+  function handleKeyPress (e) {
+    if (selectedId && e.key === 'Delete') {
+      handleDeleteElement();
+    }
+  }
+
+
   setTimeout(() => {
     window.addEventListener('click', handleOutsideClick);
+    window.addEventListener('keydown', handleKeyPress);
   });
 
 

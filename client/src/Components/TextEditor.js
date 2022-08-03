@@ -40,9 +40,13 @@ function TextEditor ({ shapeRef, stage, handleSubmit, showText }) {
   textarea.focus();
 
   textarea.addEventListener('keydown', function (e) {
-    // hide on enter
-    if (e.keyCode === 13 && !e.shiftKey) {
+    // submit on enter
+    if (e.key === 'Enter' && !e.shiftKey) {
       handleSubmit(textarea.value);
+      textarea.parentNode.removeChild(textarea);
+      window.removeEventListener('click', handleOutsideClick);
+    } else if (e.key === 'Escape') {
+      showText();
       textarea.parentNode.removeChild(textarea);
       window.removeEventListener('click', handleOutsideClick);
     }
