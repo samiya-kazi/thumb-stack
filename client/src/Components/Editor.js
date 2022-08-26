@@ -100,7 +100,7 @@ function Editor ({ selectedThumbnail, setSelectedThumbnail, setThumbnails, user 
             })
             .catch(err => console.log(err));
         } else {
-          saveThumbnail(shapes, backgroundColor, user._id, data.public_id, data.version)
+          saveThumbnail(shapes, backgroundColor, user._id, data.secure_url)
             .then((newThumbnail) => {
               setThumbnails(prevlist => [...prevlist, newThumbnail]);
               setSelectedThumbnail(newThumbnail);

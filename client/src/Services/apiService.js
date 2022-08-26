@@ -1,10 +1,10 @@
 
-export function saveThumbnail (thumbnailElements, backgroundColor, userId, imageSrc, version) {
+export function saveThumbnail (thumbnailElements, backgroundColor, userId, url) {
   const body = {
     userId,
     elements: thumbnailElements,
     background: backgroundColor,
-    imageSrc: process.env.REACT_APP_CLOUD_IMAGE_BASE_URL + '/v' + version + '/' + imageSrc + ".png",
+    imageSrc: url,
   }
 
   const options = {

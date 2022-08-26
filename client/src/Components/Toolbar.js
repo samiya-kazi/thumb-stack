@@ -38,7 +38,6 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
       setIsLoading(true);
 
       const file = event.target.files[0]
-      const file_type = file.name.split('.').at(-1);
 
       cldUpload(file, user._id)
         .then(data => {
@@ -55,7 +54,7 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
               type: 'image',
               id:  JSON.stringify(newId),
               key: newId,
-              imageSrc: process.env.REACT_APP_CLOUD_IMAGE_BASE_URL + '/v' + data.version + '/' + data.public_id + '.' + file_type,
+              imageSrc: data.secure_url,
               x: 20,
               y: 20,
               height,
