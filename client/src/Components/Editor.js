@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Stage, Layer, Rect } from 'react-konva';
 import { deleteThumbnail, saveThumbnail, updateThumbnail } from '../Services/apiService';
 import { thumbnailUpload } from '../Services/cloudinary';
-import { getFileFromUrl } from '../utils/fileConvert';
+import { downloadFromURI, getFileFromUrl } from '../utils/fileConvert';
 import { format, parseISO } from 'date-fns';
 import ShapeElement from './ShapeElement';
 import TextElement from './TextElement';
@@ -19,128 +19,79 @@ function Editor ({ selectedThumbnail, setSelectedThumbnail, setThumbnails, user 
   const stageRef = useRef();
   const bgRef = useRef();
 
+  const uriOptions = {mimeType: 'image/png', quality: 0.5};
+
 
   useEffect(() => {
-    if (selectedThumbnail) {
-      setShapes(selectedThumbnail.elements);
-      setBackgroundColor(selectedThumbnail.background);
-    } else {
-      setShapes([]);
-      setBackgroundColor('#ffffff');
-    }
+    setShapes(selectedThumbnail ? selectedThumbnail.elements : []);
+    setBackgroundColor(selectedThumbnail ? selectedThumbnail.background : '#ffffff');
   }, [selectedThumbnail])
 
 
   function checkDeselect (e) {
     // deselect when clicked on empty area
-    const clickedOnEmpty = e.target === bgRef.current;
-    if (clickedOnEmpty) {
-      setSelectedId(null);
-    }
+    if (e.target === bgRef.current) setSelectedId(null);
   };
 
 
   function handleExport () {
     setSelectedId(null);
-
-    const uri = stageRef.current.toDataURL({
-      mimeType: 'image/png',
-      quality: 0.5
-    });
-
-    const link = document.createElement('a');
-    link.download = 'stage.png';
-    link.href = uri;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const uri = stageRef.current.toDataURL(uriOptions);
+    downloadFromURI(uri);
   };
 
 
   function handleDeleteElement () {
     if(selectedId) {
-      setShapes((prevlist) => {
-        const newlist = prevlist.filter((shape) => shape.id !== selectedId);
-        setSelectedId(null);
-        return newlist;
-      })
-    }
-  }
-
-  function handlePost () {
-
-    setSelectedId(null);
-
-    const uri = stageRef.current.toDataURL({
-      mimeType: 'image/png',
-      quality: 0.5
-    });
-
-    setIsLoading(true);
-
-    getFileFromUrl(uri).then((file) => {
-      thumbnailUpload(file, user._id).then((data) => {
-
-        setIsLoading(false);
-
-        if (selectedThumbnail) {
-          updateThumbnail(selectedThumbnail._id, shapes, backgroundColor, data.public_id, data.version)
-            .then((newThumbnail) => {
-              setThumbnails(prevlist => {
-                const newlist = prevlist.map(tn => {
-                  if (tn._id === newThumbnail._id) {
-                    tn = {...newThumbnail}
-                  }
-                  return tn
-                });
-                return newlist;
-              })
-
-              setSelectedThumbnail(newThumbnail);
-            })
-            .catch(err => console.log(err));
-        } else {
-          saveThumbnail(shapes, backgroundColor, user._id, data.secure_url)
-            .then((newThumbnail) => {
-              setThumbnails(prevlist => [...prevlist, newThumbnail]);
-              setSelectedThumbnail(newThumbnail);
-            })
-            .catch(err => console.log(err));
-        }
-      })
-      .catch(err => console.log(err));
-    })
-    .catch(err => console.log(err));
-  } 
-
-
-
-
-  function handleThumbnailDelete () {
-    if (selectedThumbnail) {
-      deleteThumbnail(selectedThumbnail._id)
-        .then(() => {
-          setThumbnails(prevlist => {
-            const newlist = prevlist.filter(el => el._id !== selectedThumbnail._id);
-            return newlist;
-          })
-          setSelectedThumbnail(null);
-        });
-    }
-  }
-
-
-  function handleOutsideClick (e) {
-    if (selectedId && e.target.tagName !== 'CANVAS') {
+      setShapes((prevlist) => prevlist.filter((shape) => shape.id !== selectedId));
       setSelectedId(null);
     }
   }
 
 
-  function handleKeyPress (e) {
-    if (selectedId && e.key === 'Delete') {
-      handleDeleteElement();
+  async function handlePost () {
+    setSelectedId(null);
+    setIsLoading(true);
+
+    const uri = stageRef.current.toDataURL(uriOptions);
+    
+    try {
+      const file = await getFileFromUrl(uri);
+      const data = await thumbnailUpload(file, user._id);
+      let newThumbnail;
+
+      if (selectedThumbnail) {
+        newThumbnail = await updateThumbnail(selectedThumbnail._id, shapes, backgroundColor, data.secure_url);
+        setThumbnails(prevlist => prevlist.map(tn => tn._id === newThumbnail._id ? newThumbnail : tn));
+      } else {
+        newThumbnail = await saveThumbnail(shapes, backgroundColor, user._id, data.secure_url);
+        setThumbnails(prevlist => [...prevlist, newThumbnail]);
+      }
+      
+      setSelectedThumbnail(newThumbnail);
+      setIsLoading(false);
+      
+    } catch (error) {
+      console.log(error);
     }
+  }
+
+
+  async function handleThumbnailDelete () {
+    if (selectedThumbnail) {
+      await deleteThumbnail(selectedThumbnail._id);
+      setThumbnails(prevlist => prevlist.filter(el => el._id !== selectedThumbnail._id));
+      setSelectedThumbnail(null);
+    }
+  }
+
+  function handleOutsideClick (e) {
+    if (selectedId && e.target.tagName !== 'CANVAS') setSelectedId(null);
+  }
+  
+  
+  function handleKeyPress (e) {
+    if (selectedId && e.key === 'Delete') handleDeleteElement();
   }
 
 

@@ -5,3 +5,13 @@ export async function getFileFromUrl(url, name, defaultType = 'image/jpeg'){
     type: data.type || defaultType,
   });
 }
+
+
+export function downloadFromURI (uri) {
+  const link = document.createElement('a');
+  link.download = 'stage.png';
+  link.href = uri;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}

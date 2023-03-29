@@ -1,5 +1,5 @@
 
-export function saveThumbnail (thumbnailElements, backgroundColor, userId, url) {
+export async function saveThumbnail (thumbnailElements, backgroundColor, userId, url) {
   const body = {
     userId,
     elements: thumbnailElements,
@@ -15,24 +15,30 @@ export function saveThumbnail (thumbnailElements, backgroundColor, userId, url) 
     }
   }
 
-  return fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/thumbnail`, options)
-    .then(response => response.json())
-    .catch(err => console.log(err));
+  try {
+    const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/thumbnail`, options);
+    return response.json();
+  } catch (err) {
+    return console.log(err);
+  }
 }
 
 
-export function getThumbnails (userId) {
-  return fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/thumbnail/${userId}`)
-    .then(response => response.json())
-    .catch(err => console.log(err));
+export async function getThumbnails (userId) {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/thumbnail/${userId}`);
+    return response.json();
+  } catch (err) {
+    return console.log(err);
+  }
 }
 
 
-export function updateThumbnail (id, thumbnailElements, backgroundColor, imageSrc, version) {
+export async function updateThumbnail (id, thumbnailElements, backgroundColor, url) {
   const body = {
     elements: thumbnailElements,
     background: backgroundColor,
-    imageSrc: process.env.REACT_APP_CLOUD_IMAGE_BASE_URL + '/v' + version + '/' + imageSrc + ".png",
+    imageSrc: url,
   }
 
   const options = {
@@ -43,22 +49,28 @@ export function updateThumbnail (id, thumbnailElements, backgroundColor, imageSr
     }
   }
 
-  return fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/thumbnail?tid=${id}`, options)
-    .then(response => response.json())
-    .catch(err => console.log(err));
+  try {
+    const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/thumbnail?tid=${id}`, options);
+    return response.json();
+  } catch (err) {
+    return console.log(err);
+  }
 }
 
 
 
 
-export function deleteThumbnail (id) {
+export async function deleteThumbnail (id) {
   const options = {
     method: 'DELETE',
   }
 
-  return fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/thumbnail?tid=${id}`, options)
-    .then(response => response.json())
-    .catch(err => console.log(err));
+  try {
+    const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/thumbnail?tid=${id}`, options);
+    return response.json();
+  } catch (err) {
+    return console.log(err);
+  }
 }
 
 
