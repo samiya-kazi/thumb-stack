@@ -40,6 +40,24 @@
 
 .color-picker {
   margin-left: 0.3rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: grey solid 1px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.color-picker::-webkit-color-swatch {
+  border-radius: 15px;
+  border: none;
+}
+.color-picker::-moz-color-swatch {
+  border-radius: 15px;
+  border: none;
 }
 
 .button-container {
@@ -49,6 +67,17 @@
 
 .button-container > button {
   margin: 0 2rem;
+}
+
+.shape-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.shape-buttons > button {
+  width: 40%;
+  margin: 5px;
 }
 
 .thumbnail-container {
@@ -92,7 +121,8 @@ button:active {
 
 .color-input {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   width: 70%;
 }
 
@@ -126,7 +156,8 @@ input[type="file"] {
   border-radius: 10px;
   cursor: pointer;
   font-size: 14px;
-  width: 80%;
+  margin: 5px;
+  width: 40%;
 }
 
 
@@ -197,6 +228,17 @@ input[type="file"] {
   margin: 0.2rem 0;
   padding: 0.2rem 0.5rem;
   font-size: 1rem;
+}
+
+.input-color {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100px;
+  height: 100px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .form-container > form > div {

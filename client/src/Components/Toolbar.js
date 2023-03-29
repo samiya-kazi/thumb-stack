@@ -1,6 +1,15 @@
 import { useState } from "react";
 import { cldUpload } from "../Services/cloudinary";
 import { generateImage, getNewShape } from "../utils/shapeHelpers";
+import backgroundSVG from '../assets/background.svg';
+import fillSVG from '../assets/fill.svg';
+import outlineSVG from '../assets/outline.svg';
+import squareSVG from '../assets/square.svg';
+import circleSVG from '../assets/circle.svg';
+import starSVG from '../assets/star.svg';
+import textSVG from '../assets/text.svg';
+import uploadImageSVG from '../assets/upload-image.svg';
+import deleteSVG from '../assets/delete.svg';
 
 function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, setIsLoading }) {
 
@@ -61,18 +70,18 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
     <div className="toolbar">
       <h3>Toolbar</h3>
       <div className="color-input">
-        <label>BG:</label>
+        <label><img src={backgroundSVG} alt="background color" /></label>
         <input className='color-picker' type='color' onChange={handleBackgroundChange} defaultValue="#ffffff"/>
       </div>
 
       <div className="color-input">
-        <label>Fill:</label>
+        <label><img src={fillSVG} alt="fill color" /></label>
         <input className='color-picker' type='color' onChange={handleChange} name='fill' defaultValue="#000000" />
       </div>
 
       <div className="color-input">
-        <label>Stroke:</label>
-        <input className='color-picker' type='color' onChange={handleChange} name='stroke' defaultValue="#000000" />
+        <label><img src={outlineSVG} alt="outline color" /></label>
+        <input className='color-picker' type='color' onChange={handleChange} name='stroke' defaultValue="#000000" disabled={state.noStroke} />
       </div>
 
       <div className="color-input">
@@ -98,15 +107,17 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
         </select>
       </div>
 
-      <button onClick={() => addShapeOrText('square')}>Square</button>
-      <button onClick={() => addShapeOrText('circle')}>Circle</button>
-      <button onClick={() => addShapeOrText('star')}>Star</button>
-      <button onClick={() => addShapeOrText('text')}>Text</button>
+      <div className="shape-buttons">
+      <button onClick={() => addShapeOrText('square')}><img src={squareSVG} alt="square" /></button>
+      <button onClick={() => addShapeOrText('circle')}><img src={circleSVG} alt="circle" /></button>
+      <button onClick={() => addShapeOrText('star')}><img src={starSVG} alt="star" /></button>
+      <button onClick={() => addShapeOrText('text')}><img src={textSVG} alt="text" /></button>
       <label className="custom-file-upload">
         <input type="file" id="file_input" accept="image/png, image/jpeg" onChange={handleUpload}></input>
-        Upload Image
+        <img src={uploadImageSVG} />
       </label>
-      <button onClick={handleDeleteElement}>Delete</button>
+      <button onClick={handleDeleteElement}><img src={deleteSVG} /></button>
+      </div>
     </div>
   )
 }
