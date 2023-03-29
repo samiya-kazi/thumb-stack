@@ -1,0 +1,41 @@
+{
+  "square": {
+    "type": "square",
+    "x": 20,
+    "y": 20,
+    "width": 50, 
+    "height": 50, 
+    "draggable": true
+  },
+  "circle": {
+    "type": "circle",
+    "x": 20,
+    "y": 20,
+    "radius": 25,  
+    "draggable": true
+  },
+  "star": {
+    "type": "star",
+    "x": 20,
+    "y": 20,
+    "numPoints": 5, 
+    "innerRadius": 20,
+    "outerRadius": 40,  
+    "draggable": true
+  },
+  "text": {
+    "type": "text",
+    "x": 20,
+    "y": 20,
+    "text": "Add text",
+    "fontSize": 30,
+    "draggable": true
+  },
+  "image": {
+    "type": "image",
+    "x": 20,
+    "y": 20,
+    "rotate": 0,
+    "draggable": true
+  }
+}

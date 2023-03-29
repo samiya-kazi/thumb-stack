@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { cldUpload } from "../Services/cloudinary";
+import { generateImage, getNewShape } from "../utils/shapeHelpers";
 
 function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, setIsLoading }) {
 
@@ -15,174 +16,44 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
 
   function handleChange (event) {
     const { name, value } = event.target;
-    setState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    setState((prevState) => ({ ...prevState, [name]: value }));
   }
 
-  function handleBackgroundChange (event) {
-    setBackgroundColor(event.target.value)
-  }
+  function handleBackgroundChange (event) { setBackgroundColor(event.target.value) }
 
   function handleToggle () {
-    setState(prevState => {
-      return {...prevState, noStroke: !state.noStroke}
-    })
+    setState(prevState => { return {...prevState, noStroke: !state.noStroke} })
   }
-  
 
-  function handleUpload(event) {
 
-    if (user) {
-      setIsLoading(true);
+  async function handleUpload (event) {
+    try {
+      if (user) {
+        setIsLoading(true);
+        const file = event.target.files[0];
+        const { secure_url: url, height, width } = await cldUpload(file, user._id);
 
-      const file = event.target.files[0]
-
-      cldUpload(file, user._id)
-        .then(data => {
-          setIsLoading(false);
-
-          setShapes(prevlist => {
-            const newId = prevlist.length ? prevlist[prevlist.length - 1].key + 1 : 1;
-
-            const scale = 200 / data.height;
-            const width = data.width * scale;
-            const height = 200;
-  
-            const newImg = {
-              type: 'image',
-              id:  JSON.stringify(newId),
-              key: newId,
-              imageSrc: data.secure_url,
-              x: 20,
-              y: 20,
-              height,
-              width,
-              rotate: 0,
-              draggable: true, 
-            }
-
-            return [...prevlist, newImg]
-            
-          })
+        setShapes(prevlist => {
+          const newId = prevlist.length ? prevlist[prevlist.length - 1].key + 1 : 1;
+          const newImg = generateImage(url, newId, height, width);
+          return [...prevlist, newImg]
         })
-        .catch(err => console.log(err));
-    }
 
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
 
-
-
-  function addSquare (event) {
-    event.preventDefault();
-
+  function addShapeOrText (type) {
     setShapes((prevlist) => {
-
       const newId = prevlist.length ? prevlist[prevlist.length - 1].key + 1 : 1;
-
-      const newSquare = {
-        type: 'square',
-        id:  JSON.stringify(newId),
-        key: newId,
-        x: 20,
-        y: 20,
-        width: 50, 
-        height: 50, 
-        fill: state.fill,
-        stroke: state.stroke,
-        opacity: parseFloat(state.opacity),
-        strokeWidth: (state.noStroke ? 0 : 4),
-        draggable: true
-      }
-
+      const newSquare = getNewShape(type, newId, state);
       return [...prevlist, newSquare]
     })
   }
-
-  function addCircle (event) {
-    event.preventDefault();
-
-    
-    setShapes((prevlist) => {
-
-      const newId = prevlist.length ? prevlist[prevlist.length - 1].key + 1 : 1;
-
-      const newCircle = {
-        type: 'circle',
-        id:  JSON.stringify(newId),
-        key: newId,
-        x: 20,
-        y: 20,
-        radius: 25, 
-        fill: state.fill,
-        stroke: state.stroke,
-        opacity: parseFloat(state.opacity),
-        strokeWidth: (state.noStroke ? 0 : 4),
-        draggable: true, 
-      }
-
-      return [...prevlist, newCircle]
-    })
-  }
-
-
-  function addStar (event) {
-    event.preventDefault();
-    
-    setShapes((prevlist) => {
-
-      const newId = prevlist.length ? prevlist[prevlist.length - 1].key + 1 : 1
-
-      const newStar = {
-        type: 'star',
-        id:  JSON.stringify(newId),
-        key: newId,
-        x: 20,
-        y: 20,
-        numPoints: 5, 
-        innerRadius: 20,
-        outerRadius: 40,
-        fill: state.fill,
-        stroke: state.stroke,
-        opacity: parseFloat(state.opacity),
-        strokeWidth: (state.noStroke ? 0 : 4),
-        draggable: true, 
-      }
-
-      return [...prevlist, newStar]
-    })
-  }
-
-
-  function addText (event) {
-    event.preventDefault();
-    
-    setShapes((prevlist) => {
-
-      const newId = prevlist.length ? prevlist[prevlist.length - 1].key + 1 : 1;
-
-      const newText = {
-        type: 'text',
-        id:  JSON.stringify(newId),
-        key: newId,
-        x: 20,
-        y: 20,
-        text: 'Add text',
-        fontSize: 30,
-        fontFamily: state.font,
-        fill: state.fill,
-        stroke: state.stroke,
-        opacity: parseFloat(state.opacity),
-        strokeWidth: (state.noStroke ? 0 : 2),
-        draggable: true, 
-      }
-
-      return [...prevlist, newText]
-    })
-  }
-
 
 
 
@@ -227,10 +98,10 @@ function Toolbar ({ setShapes, setBackgroundColor, handleDeleteElement, user, se
         </select>
       </div>
 
-      <button onClick={addSquare}>Square</button>
-      <button onClick={addCircle}>Circle</button>
-      <button onClick={addStar}>Star</button>
-      <button onClick={addText}>Text</button>
+      <button onClick={() => addShapeOrText('square')}>Square</button>
+      <button onClick={() => addShapeOrText('circle')}>Circle</button>
+      <button onClick={() => addShapeOrText('star')}>Star</button>
+      <button onClick={() => addShapeOrText('text')}>Text</button>
       <label className="custom-file-upload">
         <input type="file" id="file_input" accept="image/png, image/jpeg" onChange={handleUpload}></input>
         Upload Image

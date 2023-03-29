@@ -23,7 +23,7 @@ function Navbar ({ isAuth, setIsAuth }) {
     <div className="nav">
         <Link to="/">
         <div className="logo">
-          <img src={logo} className='logo-png' />
+          <img src={logo} className='logo-png' alt='thumb-stack-logo'/>
           <div className="logo-name">ThumbStack</div>
         </div>
         </Link>
