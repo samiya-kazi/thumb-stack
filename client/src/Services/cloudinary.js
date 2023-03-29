@@ -1,5 +1,5 @@
 
-export function cldUpload (file, userId) {
+export async function cldUpload (file, userId) {
 
   const formData = new FormData();
   const file_name = file.name.split('.')[0];
@@ -9,16 +9,19 @@ export function cldUpload (file, userId) {
   formData.append("upload_preset", "rcqrwjbn");
   formData.append("public_id", public_id);
   
-  return fetch(process.env.REACT_APP_CLOUD_BASE_URL, {
-    method: "POST",
-    body: formData
-  })
-  .then((response) => response.json())
-  .catch(err => console.log(err));
+  try {
+    const response = await fetch(process.env.REACT_APP_CLOUD_BASE_URL, {
+      method: "POST",
+      body: formData
+    });
+    return response.json();
+  } catch (err) {
+    return console.log(err);
+  }
 }
 
 
-export function thumbnailUpload (file, userId) {
+export async function thumbnailUpload (file, userId) {
 
   const formData = new FormData();
   const public_id = userId + '_' + Date.now() + '_thumbnail';
@@ -27,10 +30,13 @@ export function thumbnailUpload (file, userId) {
   formData.append("upload_preset", "qhk6boar");
   formData.append("public_id", public_id);
   
-  return fetch(process.env.REACT_APP_CLOUD_BASE_URL, {
-    method: "POST",
-    body: formData
-  })
-  .then((response) => response.json())
-  .catch(err => console.log(err));
+  try {
+    const response = await fetch(process.env.REACT_APP_CLOUD_BASE_URL, {
+      method: "POST",
+      body: formData
+    });
+    return response.json();
+  } catch (err) {
+    return console.log(err);
+  }
 }

@@ -77,23 +77,29 @@ export async function deleteThumbnail (id) {
 
 
 
-export function getUserInfo () {
-  return fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/user`,{
-     method: 'GET',
-     credentials: 'include'
-   })
-   .then(response => response.json())
-   .catch(err => console.error(err));
+export async function getUserInfo () {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/user`, {
+      method: 'GET',
+      credentials: 'include'
+    });
+    return response.json();
+  } catch (err) {
+    return console.error(err);
+  }
 };
 
 
-export function logout () {
-  return fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/logout`, {
-     method: 'GET',
-     credentials: 'include'
-   })
-   .then(response => response)
-   .catch(err => console.error(err));
+export async function logout () {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/logout`, {
+      method: 'GET',
+      credentials: 'include'
+    });
+    return response;
+  } catch (err) {
+    return console.error(err);
+  }
 };
 
 
